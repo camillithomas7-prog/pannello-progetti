@@ -598,6 +598,7 @@ html.light .lt-pct{background:rgba(0,0,0,.05)}
         <span id="theme-icon">☀️</span> <span id="theme-label">Tema Chiaro</span>
       </div>
       <div onclick="exportData()" style="padding:8px 14px;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.15);border-radius:10px;color:#7c3aed;font-size:11px;font-weight:600;cursor:pointer;text-align:center">Esporta Dati</div>
+      <div onclick="pushLocalToServer(this)" style="padding:8px 14px;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2);border-radius:10px;color:#06b6d4;font-size:11px;font-weight:600;cursor:pointer;text-align:center" title="Spinge i dati di questo browser sul server (utile dopo apertura in nuovo browser)">🔄 Sincronizza Ora</div>
     </div>
   </div>
 </div>
@@ -2135,6 +2136,25 @@ function toggleTheme(){
     document.getElementById('theme-label').textContent='Tema Scuro';
   }
 })();
+
+// PUSH LOCAL STORAGE TO SERVER (recovery helper)
+async function pushLocalToServer(btn){
+  if(!confirm('Spingo TUTTI i dati di questo browser sul server. Gli altri browser verranno allineati a questi dati al prossimo reload. Continuare?')) return;
+  var orig=btn.innerHTML;btn.innerHTML='⏳ Sincronizzando...';btn.style.pointerEvents='none';
+  var skip={theme:1,'lead-cache':1,'adminScrollY':1};
+  var keys=Object.keys(localStorage),count=0,errors=0;
+  for(var i=0;i<keys.length;i++){
+    var k=keys[i];if(skip[k])continue;
+    var raw=localStorage.getItem(k);var val;try{val=JSON.parse(raw)}catch(e){val=raw}
+    try{
+      var r=await fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:k,value:val})});
+      if(r.ok)count++;else errors++;
+    }catch(e){errors++}
+  }
+  btn.innerHTML='✓ '+count+' sincronizzati'+(errors?' ('+errors+' errori)':'');
+  btn.style.background='rgba(34,197,94,.15)';btn.style.color='#22c55e';btn.style.borderColor='rgba(34,197,94,.3)';
+  setTimeout(function(){btn.innerHTML=orig;btn.style.pointerEvents='';btn.style.background='';btn.style.color='';btn.style.borderColor=''},3000);
+}
 
 // EXPORT DATA
 function exportData(){
