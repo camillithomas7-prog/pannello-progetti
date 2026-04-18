@@ -254,6 +254,19 @@ input,textarea,select,button{font-family:var(--font)}
 .todo-edit-inline .btn-save{background:var(--green);color:#fff}
 .todo-edit-inline .btn-cancel{background:rgba(255,255,255,.08);color:var(--muted)}
 .todo__priority{padding:2px 8px;border-radius:10px;font-size:9px;font-weight:700;margin-right:4px}
+/* Progetti grid */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.proj-card{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:all .2s;position:relative}
+.proj-card:hover{border-color:rgba(124,58,237,.35);transform:translateY(-1px);background:rgba(124,58,237,.04)}
+.proj-color{width:10px;align-self:stretch;border-radius:4px;flex-shrink:0}
+.proj-info{flex:1;min-width:0}
+.proj-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.proj-meta{font-size:11px;color:var(--muted)}
+.proj-del{background:none;border:none;color:var(--red);cursor:pointer;font-size:18px;padding:4px 8px;opacity:.4;transition:opacity .2s;line-height:1}
+.proj-del:hover{opacity:1}
+.proj-count{display:inline-block;min-width:22px;padding:2px 8px;background:rgba(124,58,237,.15);color:#7c3aed;border-radius:10px;font-size:11px;font-weight:700;margin-left:6px}
+html.light .proj-card{background:rgba(255,255,255,.8);border:1px solid var(--border)}
+html.light .proj-name{color:#333}
 .pri-alta{background:rgba(239,68,68,0.12);color:var(--red)}
 .pri-media{background:rgba(234,179,8,0.12);color:var(--yellow)}
 .pri-bassa{background:rgba(34,197,94,0.12);color:var(--green)}
@@ -1088,20 +1101,38 @@ RISPOSTE RAPIDE:
   <div class="comp-list" id="comp-list"></div>
 </div>
 
-<!-- ==================== TODO LIST ==================== -->
+<!-- ==================== TODO LIST (PROGETTI) ==================== -->
 <div class="page" id="page-todo">
-  <div class="page-title">To-Do List</div>
-  <p class="page-sub">Le tue attivita da completare</p>
-  <div class="todo-form">
-    <input type="text" id="todo-text" placeholder="Nuova attivita..." onkeydown="if(event.key==='Enter')addTodo()">
-    <select id="todo-pri" style="padding:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:10px;color:rgba(255,255,255,.7);font-size:13px">
-      <option value="alta">Alta</option>
-      <option value="media" selected>Media</option>
-      <option value="bassa">Bassa</option>
-    </select>
-    <button onclick="addTodo()">Aggiungi</button>
+  <!-- Vista elenco progetti -->
+  <div id="todo-projects-view">
+    <div class="page-title">To-Do List — Progetti</div>
+    <p class="page-sub">Seleziona un progetto oppure creane uno nuovo</p>
+    <div class="todo-form">
+      <input type="text" id="proj-name" placeholder="Nome nuovo progetto..." onkeydown="if(event.key==='Enter')addProject()">
+      <input type="color" id="proj-color" value="#7c3aed" style="width:52px;height:42px;padding:2px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;cursor:pointer">
+      <button onclick="addProject()">+ Progetto</button>
+    </div>
+    <div class="proj-grid" id="projects-grid"></div>
   </div>
-  <div class="todo-list" id="todo-list"></div>
+  <!-- Vista dettaglio progetto (todo del progetto) -->
+  <div id="todo-project-detail" style="display:none">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+      <button onclick="backToProjects()" style="background:none;border:1px solid var(--border);color:var(--text);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:12px;font-family:inherit">&larr; Progetti</button>
+      <span id="proj-badge" style="padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;color:#fff"></span>
+    </div>
+    <div class="page-title" id="proj-title">To-Do List</div>
+    <p class="page-sub" id="proj-sub">Le tue attivita da completare</p>
+    <div class="todo-form">
+      <input type="text" id="todo-text" placeholder="Nuova attivita..." onkeydown="if(event.key==='Enter')addTodo()">
+      <select id="todo-pri" style="padding:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:10px;color:rgba(255,255,255,.7);font-size:13px">
+        <option value="alta">Alta</option>
+        <option value="media" selected>Media</option>
+        <option value="bassa">Bassa</option>
+      </select>
+      <button onclick="addTodo()">Aggiungi</button>
+    </div>
+    <div class="todo-list" id="todo-list"></div>
+  </div>
 </div>
 
 <!-- ==================== CALENDARIO ==================== -->
@@ -1672,46 +1703,131 @@ function addComp(){
 function delComp(i){var list=getStore('competitors');list.splice(i,1);setStore('competitors',list);renderComps()}
 renderComps();
 
-// TODOS
-var editingTodo=-1;
+// TODOS + PROGETTI
+var editingTodo=null; // id della todo in editing
+var currentProjectId=null;
+
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+
+function migrateTodosIfNeeded(){
+  var projs=getStore('todo-projects');
+  if(!Array.isArray(projs)||projs.length===0){
+    projs=[{id:'cod-digital',name:'COD Digital',color:'#7c3aed',created:new Date().toISOString()}];
+    setStore('todo-projects',projs);
+  }
+  var todos=getStore('todos');
+  if(!Array.isArray(todos))todos=[];
+  var changed=false;
+  todos.forEach(function(t){
+    if(!t.id){t.id='t_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,6);changed=true}
+    if(!t.projectId){t.projectId='cod-digital';changed=true}
+  });
+  if(changed)setStore('todos',todos);
+}
+
+function renderProjects(){
+  var projs=getStore('todo-projects');
+  var todos=getStore('todos');
+  var html='';
+  projs.forEach(function(p){
+    var all=todos.filter(function(t){return t.projectId===p.id});
+    var open=all.filter(function(t){return !t.done}).length;
+    html+='<div class="proj-card" onclick="openProject(\''+p.id+'\')">'
+      +'<div class="proj-color" style="background:'+(p.color||'#7c3aed')+'"></div>'
+      +'<div class="proj-info"><div class="proj-name">'+escHtml(p.name)+'</div><div class="proj-meta">'+open+' aperte · '+all.length+' totali</div></div>'
+      +'<button onclick="event.stopPropagation();delProject(\''+p.id+'\')" class="proj-del" title="Elimina progetto">&times;</button>'
+      +'</div>';
+  });
+  document.getElementById('projects-grid').innerHTML=html||'<p style="color:var(--muted);font-size:13px;padding:20px;text-align:center">Nessun progetto. Crea il primo!</p>';
+}
+
+function addProject(){
+  var name=document.getElementById('proj-name').value.trim();
+  if(!name)return;
+  var color=document.getElementById('proj-color').value||'#7c3aed';
+  var projs=getStore('todo-projects');
+  projs.unshift({id:'p_'+Date.now().toString(36),name:name,color:color,created:new Date().toISOString()});
+  setStore('todo-projects',projs);
+  document.getElementById('proj-name').value='';
+  renderProjects();
+}
+
+function delProject(id){
+  if(!confirm('Eliminare il progetto e tutte le sue attivita?'))return;
+  var projs=getStore('todo-projects').filter(function(p){return p.id!==id});
+  var todos=getStore('todos').filter(function(t){return t.projectId!==id});
+  setStore('todo-projects',projs);
+  setStore('todos',todos);
+  renderProjects();
+}
+
+function openProject(id){
+  currentProjectId=id;
+  var proj=getStore('todo-projects').find(function(p){return p.id===id});
+  if(!proj){backToProjects();return}
+  document.getElementById('proj-title').textContent=proj.name;
+  document.getElementById('proj-sub').textContent='Le tue attivita per questo progetto';
+  var badge=document.getElementById('proj-badge');
+  badge.textContent=proj.name;
+  badge.style.background=proj.color||'#7c3aed';
+  document.getElementById('todo-projects-view').style.display='none';
+  document.getElementById('todo-project-detail').style.display='block';
+  renderTodos();
+}
+
+function backToProjects(){
+  currentProjectId=null;
+  editingTodo=null;
+  document.getElementById('todo-projects-view').style.display='block';
+  document.getElementById('todo-project-detail').style.display='none';
+  renderProjects();
+}
+
 function renderTodos(){
-  var list=getStore('todos'),html='';
-  list.forEach(function(t,i){
+  if(!currentProjectId)return;
+  var list=getStore('todos').filter(function(t){return t.projectId===currentProjectId});
+  var html='';
+  list.forEach(function(t){
     var priClass=t.pri==='alta'?'pri-alta':t.pri==='media'?'pri-media':'pri-bassa';
-    if(editingTodo===i){
-      html+='<div class="todo"><div class="todo__check'+(t.done?' done':'')+'" onclick="toggleTodo('+i+')"></div><div class="todo-edit-inline"><input type="text" id="edit-text-'+i+'" value="'+t.text.replace(/"/g,'&quot;')+'" onkeydown="if(event.key===\'Enter\')saveTodo('+i+');if(event.key===\'Escape\')cancelEdit()"><select id="edit-pri-'+i+'"><option value="alta"'+(t.pri==='alta'?' selected':'')+'>Alta</option><option value="media"'+(t.pri==='media'?' selected':'')+'>Media</option><option value="bassa"'+(t.pri==='bassa'?' selected':'')+'>Bassa</option></select><button class="btn-save" onclick="saveTodo('+i+')">Salva</button><button class="btn-cancel" onclick="cancelEdit()">Annulla</button></div></div>';
+    if(editingTodo===t.id){
+      html+='<div class="todo"><div class="todo__check'+(t.done?' done':'')+'" onclick="toggleTodo(\''+t.id+'\')"></div><div class="todo-edit-inline"><input type="text" id="edit-text-'+t.id+'" value="'+escHtml(t.text)+'" onkeydown="if(event.key===\'Enter\')saveTodo(\''+t.id+'\');if(event.key===\'Escape\')cancelEdit()"><select id="edit-pri-'+t.id+'"><option value="alta"'+(t.pri==='alta'?' selected':'')+'>Alta</option><option value="media"'+(t.pri==='media'?' selected':'')+'>Media</option><option value="bassa"'+(t.pri==='bassa'?' selected':'')+'>Bassa</option></select><button class="btn-save" onclick="saveTodo(\''+t.id+'\')">Salva</button><button class="btn-cancel" onclick="cancelEdit()">Annulla</button></div></div>';
     } else {
-      html+='<div class="todo"><div class="todo__check'+(t.done?' done':'')+'" onclick="toggleTodo('+i+')"></div><span class="todo__priority '+priClass+'">'+t.pri+'</span><span class="todo__text'+(t.done?' done':'')+'" ondblclick="editTodo('+i+')">'+t.text+'</span><span class="todo__date">'+t.date+'</span><button class="todo__edit" onclick="editTodo('+i+')" title="Modifica">&#9998;</button><button class="todo__del" onclick="delTodo('+i+')">x</button></div>';
+      html+='<div class="todo"><div class="todo__check'+(t.done?' done':'')+'" onclick="toggleTodo(\''+t.id+'\')"></div><span class="todo__priority '+priClass+'">'+t.pri+'</span><span class="todo__text'+(t.done?' done':'')+'" ondblclick="editTodo(\''+t.id+'\')">'+escHtml(t.text)+'</span><span class="todo__date">'+(t.date||'')+'</span><button class="todo__edit" onclick="editTodo(\''+t.id+'\')" title="Modifica">&#9998;</button><button class="todo__del" onclick="delTodo(\''+t.id+'\')">x</button></div>';
     }
   });
   document.getElementById('todo-list').innerHTML=html||'<p style="color:var(--muted);font-size:13px;padding:20px;text-align:center">Nessuna attivita. Aggiungi la prima!</p>';
-  if(editingTodo>=0){var el=document.getElementById('edit-text-'+editingTodo);if(el){el.focus();el.select()}}
+  if(editingTodo){var el=document.getElementById('edit-text-'+editingTodo);if(el){el.focus();el.select()}}
 }
+
 function addTodo(){
+  if(!currentProjectId)return;
   var text=document.getElementById('todo-text').value.trim();
   var pri=document.getElementById('todo-pri').value;
   if(!text)return;
   var list=getStore('todos');
-  list.unshift({text:text,pri:pri,done:false,date:new Date().toLocaleDateString('it-IT')});
+  list.unshift({id:'t_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,6),text:text,pri:pri,done:false,date:new Date().toLocaleDateString('it-IT'),projectId:currentProjectId});
   setStore('todos',list);
   document.getElementById('todo-text').value='';
-  editingTodo=-1;
+  editingTodo=null;
   renderTodos();
 }
-function editTodo(i){editingTodo=i;renderTodos()}
-function cancelEdit(){editingTodo=-1;renderTodos()}
-function saveTodo(i){
-  var text=document.getElementById('edit-text-'+i).value.trim();
+function editTodo(id){editingTodo=id;renderTodos()}
+function cancelEdit(){editingTodo=null;renderTodos()}
+function saveTodo(id){
+  var text=document.getElementById('edit-text-'+id).value.trim();
   if(!text){cancelEdit();return}
-  var pri=document.getElementById('edit-pri-'+i).value;
+  var pri=document.getElementById('edit-pri-'+id).value;
   var list=getStore('todos');
-  list[i].text=text;list[i].pri=pri;
+  var t=list.find(function(x){return x.id===id});
+  if(t){t.text=text;t.pri=pri}
   setStore('todos',list);
-  editingTodo=-1;renderTodos();
+  editingTodo=null;renderTodos();
 }
-function toggleTodo(i){var list=getStore('todos');list[i].done=!list[i].done;setStore('todos',list);renderTodos()}
-function delTodo(i){var list=getStore('todos');list.splice(i,1);setStore('todos',list);renderTodos()}
-renderTodos();
+function toggleTodo(id){var list=getStore('todos');var t=list.find(function(x){return x.id===id});if(t){t.done=!t.done;setStore('todos',list);renderTodos()}}
+function delTodo(id){var list=getStore('todos').filter(function(t){return t.id!==id});setStore('todos',list);renderTodos()}
+
+migrateTodosIfNeeded();
+renderProjects();
 
 // CALENDAR
 var calDate=new Date();var calSelected=null;
@@ -1961,7 +2077,7 @@ function exportData(){
 }
 
 // SYNC FROM MYSQL
-fetch('api.php?key=__all__').then(function(r){return r.json()}).then(function(d){if(d&&typeof d==='object'){Object.keys(d).forEach(function(k){try{localStorage.setItem(k,typeof d[k]==='string'?d[k]:JSON.stringify(d[k]))}catch(e){}});if(typeof renderTodos==='function')renderTodos();if(typeof renderTools==='function')renderTools();if(typeof bilRender==='function')bilRender();if(typeof renderNotes==='function')renderNotes();if(typeof renderLooms==='function')renderLooms()}}).catch(function(){});
+fetch('api.php?key=__all__').then(function(r){return r.json()}).then(function(d){if(d&&typeof d==='object'){Object.keys(d).forEach(function(k){try{localStorage.setItem(k,typeof d[k]==='string'?d[k]:JSON.stringify(d[k]))}catch(e){}});if(typeof migrateTodosIfNeeded==='function')migrateTodosIfNeeded();if(typeof renderProjects==='function'){if(currentProjectId){renderTodos()}else{renderProjects()}}if(typeof renderTools==='function')renderTools();if(typeof bilRender==='function')bilRender();if(typeof renderNotes==='function')renderNotes();if(typeof renderLooms==='function')renderLooms()}}).catch(function(){});
 // SERVICE WORKER
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){})}
 </script>
