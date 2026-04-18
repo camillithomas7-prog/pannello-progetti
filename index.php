@@ -598,7 +598,6 @@ html.light .lt-pct{background:rgba(0,0,0,.05)}
         <span id="theme-icon">☀️</span> <span id="theme-label">Tema Chiaro</span>
       </div>
       <div onclick="exportData()" style="padding:8px 14px;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.15);border-radius:10px;color:#7c3aed;font-size:11px;font-weight:600;cursor:pointer;text-align:center">Esporta Dati</div>
-      <div onclick="pushLocalToServer(this)" style="padding:8px 14px;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2);border-radius:10px;color:#06b6d4;font-size:11px;font-weight:600;cursor:pointer;text-align:center" title="Spinge i dati di questo browser sul server (utile dopo apertura in nuovo browser)">🔄 Sincronizza Ora</div>
     </div>
   </div>
 </div>
