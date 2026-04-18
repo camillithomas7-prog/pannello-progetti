@@ -2142,18 +2142,20 @@ async function pushLocalToServer(btn){
   if(!confirm('Spingo TUTTI i dati di questo browser sul server. Gli altri browser verranno allineati a questi dati al prossimo reload. Continuare?')) return;
   var orig=btn.innerHTML;btn.innerHTML='⏳ Sincronizzando...';btn.style.pointerEvents='none';
   var skip={theme:1,'lead-cache':1,'adminScrollY':1};
-  var keys=Object.keys(localStorage),count=0,errors=0;
+  var keys=Object.keys(localStorage),count=0,errors=0,errDetails=[];
   for(var i=0;i<keys.length;i++){
     var k=keys[i];if(skip[k])continue;
     var raw=localStorage.getItem(k);var val;try{val=JSON.parse(raw)}catch(e){val=raw}
     try{
-      var r=await fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:k,value:val})});
-      if(r.ok)count++;else errors++;
-    }catch(e){errors++}
+      var r=await fetch('api.php',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:k,value:val})});
+      if(r.ok){count++}else{errors++;var body='';try{body=await r.text()}catch(e){}errDetails.push(k+' → HTTP '+r.status+' '+body.substring(0,80))}
+    }catch(e){errors++;errDetails.push(k+' → '+(e.message||'network'))}
   }
   btn.innerHTML='✓ '+count+' sincronizzati'+(errors?' ('+errors+' errori)':'');
   btn.style.background='rgba(34,197,94,.15)';btn.style.color='#22c55e';btn.style.borderColor='rgba(34,197,94,.3)';
-  setTimeout(function(){btn.innerHTML=orig;btn.style.pointerEvents='';btn.style.background='';btn.style.color='';btn.style.borderColor=''},3000);
+  if(errors) console.error('Sync errors:', errDetails);
+  setTimeout(function(){btn.innerHTML=orig;btn.style.pointerEvents='';btn.style.background='';btn.style.color='';btn.style.borderColor=''},3500);
+  if(errors) alert('Errori sincronizzazione (vedi Console):\n\n'+errDetails.slice(0,5).join('\n'));
 }
 
 // EXPORT DATA
@@ -2172,7 +2174,33 @@ function exportData(){
 }
 
 // SYNC FROM MYSQL
-fetch('api.php?key=__all__').then(function(r){return r.json()}).then(function(d){if(d&&typeof d==='object'){Object.keys(d).forEach(function(k){try{localStorage.setItem(k,typeof d[k]==='string'?d[k]:JSON.stringify(d[k]))}catch(e){}});if(typeof migrateTodosIfNeeded==='function')migrateTodosIfNeeded();if(typeof renderProjects==='function'){if(currentProjectId){renderTodos()}else{renderProjects()}}if(typeof renderTools==='function')renderTools();if(typeof bilRender==='function')bilRender();if(typeof renderNotes==='function')renderNotes();if(typeof renderLooms==='function')renderLooms();if(typeof loadAdsFromStore==='function')loadAdsFromStore();if(typeof loadDriveUrls==='function')loadDriveUrls()}}).catch(function(){});
+var __lastSyncHash='';
+function pullFromServer(isInitial){
+  return fetch('api.php?key=__all__',{credentials:'same-origin'}).then(function(r){return r.json()}).then(function(d){
+    if(!d||typeof d!=='object')return;
+    var hash=JSON.stringify(d);
+    if(!isInitial && hash===__lastSyncHash) return;
+    __lastSyncHash=hash;
+    // Skip re-render if user is typing in an input/textarea
+    var ae=document.activeElement;
+    var isEditing=ae && (ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'||ae.isContentEditable);
+    Object.keys(d).forEach(function(k){try{localStorage.setItem(k,typeof d[k]==='string'?d[k]:JSON.stringify(d[k]))}catch(e){}});
+    if(isInitial && typeof migrateTodosIfNeeded==='function')migrateTodosIfNeeded();
+    if(isEditing && !isInitial) return;
+    if(typeof renderProjects==='function'){if(currentProjectId){renderTodos()}else{renderProjects()}}
+    if(typeof renderTools==='function')renderTools();
+    if(typeof bilRender==='function')bilRender();
+    if(typeof renderNotes==='function')renderNotes();
+    if(typeof renderLooms==='function')renderLooms();
+    if(typeof loadAdsFromStore==='function')loadAdsFromStore();
+    if(typeof loadDriveUrls==='function')loadDriveUrls();
+  }).catch(function(){});
+}
+pullFromServer(true);
+// Live sync: poll server every 5s for changes from other browsers
+setInterval(function(){pullFromServer(false)},5000);
+// Also pull when tab regains focus (more responsive after context switch)
+window.addEventListener('focus',function(){pullFromServer(false)});
 // SERVICE WORKER
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){})}
 </script>
