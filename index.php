@@ -510,6 +510,19 @@ html.light .proj-name{color:#333}
 .lead-total{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center;backdrop-filter:blur(10px)}
 .lead-total__num{font-size:26px;font-weight:800}
 .lead-total__label{font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:600;margin-top:2px}
+.lt-pct{display:inline-block;margin-left:4px;padding:1px 6px;background:rgba(255,255,255,.06);border-radius:8px;font-size:9px;color:inherit;opacity:.85}
+html.light .lt-pct{background:rgba(0,0,0,.05)}
+.lead-card__conversions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.conv-box{padding:8px 6px;border-radius:10px;text-align:center;border:1px solid transparent}
+.conv-box--ok{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.2)}
+.conv-box--ko{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2)}
+.conv-box--wait{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2)}
+.conv-box__num{font-size:18px;font-weight:800}
+.conv-box--ok .conv-box__num{color:#22c55e}
+.conv-box--ko .conv-box__num{color:#ef4444}
+.conv-box--wait .conv-box__num{color:#f59e0b}
+.conv-box__pct{font-size:10px;font-weight:700;opacity:.8;margin-top:1px}
+.conv-box__label{font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:700;margin-top:2px}
 .lead-last-update{font-size:11px;color:var(--muted);margin-bottom:12px}
 
 /* MOBILE BOTTOM BAR */
@@ -653,6 +666,14 @@ html.light .proj-name{color:#333}
     <div class="lead-total lead-total--cpl"><div class="lead-total__num" id="lt-cpl" style="color:var(--cyan)">—</div><div class="lead-total__label">CPL Medio</div></div>
   </div>
 
+  <div class="lead-total-bar" style="margin-top:10px">
+    <div class="lead-total"><div class="lead-total__num" id="lt-confermati" style="color:#22c55e">—</div><div class="lead-total__label">Confermati <span id="lt-confermati-pct" class="lt-pct">—</span></div></div>
+    <div class="lead-total"><div class="lead-total__num" id="lt-annullati" style="color:#ef4444">—</div><div class="lead-total__label">Annullati <span id="lt-annullati-pct" class="lt-pct">—</span></div></div>
+    <div class="lead-total"><div class="lead-total__num" id="lt-ricontattare" style="color:#f59e0b">—</div><div class="lead-total__label">Da Richiamare <span id="lt-ricontattare-pct" class="lt-pct">—</span></div></div>
+    <div class="lead-total"><div class="lead-total__num" id="lt-non-risponde" style="color:#6b7280">—</div><div class="lead-total__label">Non Risponde <span id="lt-non-risponde-pct" class="lt-pct">—</span></div></div>
+    <div class="lead-total"><div class="lead-total__num" id="lt-contattato" style="color:#3b82f6">—</div><div class="lead-total__label">Contattati <span id="lt-contattato-pct" class="lt-pct">—</span></div></div>
+  </div>
+
   <div class="lead-cards">
     <div class="lead-card lead-card--seg">
       <div class="lead-card__header"><div class="lead-card__name">Funnel Segretarie</div><div class="lead-card__status" id="status-seg">...</div></div>
@@ -664,6 +685,11 @@ html.light .proj-name{color:#333}
       <div class="lead-card__methods">
         <div class="lead-method"><div class="lead-method__num" id="seg-bon">—</div><div class="lead-method__label">Bonifico</div></div>
         <div class="lead-method"><div class="lead-method__num" id="seg-cod">—</div><div class="lead-method__label">Contrassegno</div></div>
+      </div>
+      <div class="lead-card__conversions">
+        <div class="conv-box conv-box--ok"><div class="conv-box__num" id="seg-confermati">—</div><div class="conv-box__pct" id="seg-confermati-pct">—</div><div class="conv-box__label">Confermati</div></div>
+        <div class="conv-box conv-box--ko"><div class="conv-box__num" id="seg-annullati">—</div><div class="conv-box__pct" id="seg-annullati-pct">—</div><div class="conv-box__label">Annullati</div></div>
+        <div class="conv-box conv-box--wait"><div class="conv-box__num" id="seg-ricontattare">—</div><div class="conv-box__pct" id="seg-ricontattare-pct">—</div><div class="conv-box__label">Da Richiamare</div></div>
       </div>
       <div class="lead-card__ads"><span class="ads-label">Spesa ADS €</span><input type="number" id="ads-seg" placeholder="0.00" step="0.01" min="0" oninput="updateCPL()"></div>
       <div class="lead-cpl"><span class="lead-cpl__label">CPL</span><span class="lead-cpl__val" id="cpl-seg">—</span></div>
@@ -681,6 +707,11 @@ html.light .proj-name{color:#333}
         <div class="lead-method"><div class="lead-method__num" id="nails-bon">—</div><div class="lead-method__label">Bonifico</div></div>
         <div class="lead-method"><div class="lead-method__num" id="nails-cod">—</div><div class="lead-method__label">Contrassegno</div></div>
       </div>
+      <div class="lead-card__conversions">
+        <div class="conv-box conv-box--ok"><div class="conv-box__num" id="nails-confermati">—</div><div class="conv-box__pct" id="nails-confermati-pct">—</div><div class="conv-box__label">Confermati</div></div>
+        <div class="conv-box conv-box--ko"><div class="conv-box__num" id="nails-annullati">—</div><div class="conv-box__pct" id="nails-annullati-pct">—</div><div class="conv-box__label">Annullati</div></div>
+        <div class="conv-box conv-box--wait"><div class="conv-box__num" id="nails-ricontattare">—</div><div class="conv-box__pct" id="nails-ricontattare-pct">—</div><div class="conv-box__label">Da Richiamare</div></div>
+      </div>
       <div class="lead-card__ads"><span class="ads-label">Spesa ADS €</span><input type="number" id="ads-nails" placeholder="0.00" step="0.01" min="0" oninput="updateCPL()"></div>
       <div class="lead-cpl"><span class="lead-cpl__label">CPL</span><span class="lead-cpl__val" id="cpl-nails">—</span></div>
       <div class="lead-card__links"><a href="https://mediumturquoise-mule-624710.hostingersite.com/admin.php" target="_blank" class="btn-link btn-admin" style="flex:1;text-align:center;padding:8px">Apri Admin</a></div>
@@ -696,6 +727,11 @@ html.light .proj-name{color:#333}
       <div class="lead-card__methods">
         <div class="lead-method"><div class="lead-method__num" id="lash-bon">—</div><div class="lead-method__label">Bonifico</div></div>
         <div class="lead-method"><div class="lead-method__num" id="lash-cod">—</div><div class="lead-method__label">Contrassegno</div></div>
+      </div>
+      <div class="lead-card__conversions">
+        <div class="conv-box conv-box--ok"><div class="conv-box__num" id="lash-confermati">—</div><div class="conv-box__pct" id="lash-confermati-pct">—</div><div class="conv-box__label">Confermati</div></div>
+        <div class="conv-box conv-box--ko"><div class="conv-box__num" id="lash-annullati">—</div><div class="conv-box__pct" id="lash-annullati-pct">—</div><div class="conv-box__label">Annullati</div></div>
+        <div class="conv-box conv-box--wait"><div class="conv-box__num" id="lash-ricontattare">—</div><div class="conv-box__pct" id="lash-ricontattare-pct">—</div><div class="conv-box__label">Da Richiamare</div></div>
       </div>
       <div class="lead-card__ads"><span class="ads-label">Spesa ADS €</span><input type="number" id="ads-lash" placeholder="0.00" step="0.01" min="0" oninput="updateCPL()"></div>
       <div class="lead-cpl"><span class="lead-cpl__label">CPL</span><span class="lead-cpl__val" id="cpl-lash">—</span></div>
@@ -1247,10 +1283,12 @@ var leadEndpoints = [
   {key:'lash', url:'https://darkred-koala-809285.hostingersite.com/api_stats.php', name:'Lash'}
 ];
 
+function pct(part,tot){if(!tot||tot<=0)return '—';return Math.round((part/tot)*100)+'%'}
+
 function fetchAllLeads(){
   var btn=document.querySelector('.lead-refresh');
   btn.classList.add('loading');btn.textContent='Caricamento...';
-  var totalAll=0,nuoviAll=0,oggiAll=0,codAll=0;
+  var agg={totali:0,nuovi:0,oggi:0,contrassegno:0,confermati:0,annullati:0,da_ricontattare:0,non_risponde:0,contattato:0};
   var done=0;
 
   leadEndpoints.forEach(function(ep){
@@ -1258,34 +1296,54 @@ function fetchAllLeads(){
     statusEl.textContent='...';statusEl.className='lead-card__status';
 
     fetch(ep.url).then(function(r){return r.json()}).then(function(d){
-      document.getElementById(ep.key+'-totali').textContent=d.totali;
-      document.getElementById(ep.key+'-nuovi').textContent=d.nuovi;
-      document.getElementById(ep.key+'-oggi').textContent=d.oggi;
-      document.getElementById(ep.key+'-bon').textContent=d.bonifico;
-      document.getElementById(ep.key+'-cod').textContent=d.contrassegno;
+      var tot=d.totali||0;
+      document.getElementById(ep.key+'-totali').textContent=tot;
+      document.getElementById(ep.key+'-nuovi').textContent=d.nuovi||0;
+      document.getElementById(ep.key+'-oggi').textContent=d.oggi||0;
+      document.getElementById(ep.key+'-bon').textContent=d.bonifico||0;
+      document.getElementById(ep.key+'-cod').textContent=d.contrassegno||0;
+      // Conversioni
+      var conf=d.confermati||0,ann=d.annullati||0,ric=d.da_ricontattare||0;
+      document.getElementById(ep.key+'-confermati').textContent=conf;
+      document.getElementById(ep.key+'-confermati-pct').textContent=pct(conf,tot);
+      document.getElementById(ep.key+'-annullati').textContent=ann;
+      document.getElementById(ep.key+'-annullati-pct').textContent=pct(ann,tot);
+      document.getElementById(ep.key+'-ricontattare').textContent=ric;
+      document.getElementById(ep.key+'-ricontattare-pct').textContent=pct(ric,tot);
+
       statusEl.textContent='Online';statusEl.className='lead-card__status lead-card__status--ok';
-      totalAll+=d.totali;nuoviAll+=d.nuovi;oggiAll+=d.oggi;codAll+=d.contrassegno;
+      agg.totali+=tot;agg.nuovi+=(d.nuovi||0);agg.oggi+=(d.oggi||0);agg.contrassegno+=(d.contrassegno||0);
+      agg.confermati+=conf;agg.annullati+=ann;agg.da_ricontattare+=ric;
+      agg.non_risponde+=(d.non_risponde||0);agg.contattato+=(d.contattato||0);
       done++;
-      if(done===leadEndpoints.length) updateTotals(totalAll,nuoviAll,oggiAll,codAll,btn);
+      if(done===leadEndpoints.length) updateTotals(agg,btn);
     }).catch(function(){
       statusEl.textContent='Offline';statusEl.className='lead-card__status lead-card__status--err';
       done++;
-      if(done===leadEndpoints.length) updateTotals(totalAll,nuoviAll,oggiAll,codAll,btn);
+      if(done===leadEndpoints.length) updateTotals(agg,btn);
     });
   });
 }
 
-function updateTotals(t,n,o,c,btn){
-  document.getElementById('lt-total').textContent=t;
-  document.getElementById('lt-nuovi').textContent=n;
-  document.getElementById('lt-oggi').textContent=o;
-  document.getElementById('lt-cod').textContent=c;
-  document.getElementById('badge-total-leads').textContent=n>0?n:'0';
+function updateTotals(a,btn){
+  document.getElementById('lt-total').textContent=a.totali;
+  document.getElementById('lt-nuovi').textContent=a.nuovi;
+  document.getElementById('lt-oggi').textContent=a.oggi;
+  document.getElementById('lt-cod').textContent=a.contrassegno;
+  document.getElementById('lt-confermati').textContent=a.confermati;
+  document.getElementById('lt-confermati-pct').textContent=pct(a.confermati,a.totali);
+  document.getElementById('lt-annullati').textContent=a.annullati;
+  document.getElementById('lt-annullati-pct').textContent=pct(a.annullati,a.totali);
+  document.getElementById('lt-ricontattare').textContent=a.da_ricontattare;
+  document.getElementById('lt-ricontattare-pct').textContent=pct(a.da_ricontattare,a.totali);
+  document.getElementById('lt-non-risponde').textContent=a.non_risponde;
+  document.getElementById('lt-non-risponde-pct').textContent=pct(a.non_risponde,a.totali);
+  document.getElementById('lt-contattato').textContent=a.contattato;
+  document.getElementById('lt-contattato-pct').textContent=pct(a.contattato,a.totali);
+  document.getElementById('badge-total-leads').textContent=a.nuovi>0?a.nuovi:'0';
   document.getElementById('lead-last-update').textContent='Ultimo aggiornamento: '+new Date().toLocaleTimeString('it-IT');
   btn.classList.remove('loading');btn.textContent='Aggiorna dati';
-  // Store
-  localStorage.setItem('lead-cache',JSON.stringify({t:t,n:n,o:o,c:c,time:Date.now()}));
-  // Recalc CPL with new lead data
+  localStorage.setItem('lead-cache',JSON.stringify({t:a.totali,n:a.nuovi,o:a.oggi,c:a.contrassegno,conf:a.confermati,ann:a.annullati,ric:a.da_ricontattare,nr:a.non_risponde,cnt:a.contattato,time:Date.now()}));
   if(typeof updateCPL==='function') updateCPL();
 }
 
@@ -1299,6 +1357,11 @@ function updateTotals(t,n,o,c,btn){
       document.getElementById('lt-nuovi').textContent=d.n;
       document.getElementById('lt-oggi').textContent=d.o;
       document.getElementById('lt-cod').textContent=d.c;
+      if(d.conf!==undefined){document.getElementById('lt-confermati').textContent=d.conf;document.getElementById('lt-confermati-pct').textContent=pct(d.conf,d.t)}
+      if(d.ann!==undefined){document.getElementById('lt-annullati').textContent=d.ann;document.getElementById('lt-annullati-pct').textContent=pct(d.ann,d.t)}
+      if(d.ric!==undefined){document.getElementById('lt-ricontattare').textContent=d.ric;document.getElementById('lt-ricontattare-pct').textContent=pct(d.ric,d.t)}
+      if(d.nr!==undefined){document.getElementById('lt-non-risponde').textContent=d.nr;document.getElementById('lt-non-risponde-pct').textContent=pct(d.nr,d.t)}
+      if(d.cnt!==undefined){document.getElementById('lt-contattato').textContent=d.cnt;document.getElementById('lt-contattato-pct').textContent=pct(d.cnt,d.t)}
       document.getElementById('badge-total-leads').textContent=d.n>0?d.n:'0';
       document.getElementById('lead-last-update').textContent='Cache dal: '+new Date(d.time).toLocaleTimeString('it-IT');
     }catch(e){}
