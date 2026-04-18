@@ -599,8 +599,6 @@ input,textarea,select,button{font-family:var(--font)}
 <!-- MOBILE OVERLAY & MORE MENU -->
 <div class="mob-overlay" id="mob-overlay" onclick="closeMobMore()"></div>
 <div class="mob-more" id="mob-more">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-  </div>
   <div class="mob-more__item" onclick="showPage('competitors',this)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
     Competitor
