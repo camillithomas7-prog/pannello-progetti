@@ -240,7 +240,7 @@ input,textarea,select,button{font-family:var(--font)}
 .todo:hover{border-color:rgba(124,58,237,.12)}
 .todo__check{width:20px;height:20px;border-radius:6px;border:2px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
 .todo__check.done{background:var(--green);border-color:var(--green)}
-.todo__check.done::after{content:'\\2713';color:#fff;font-size:12px;font-weight:700}
+.todo__check.done::after{content:'✓';color:#fff;font-size:14px;font-weight:700;line-height:1}
 .todo__text{flex:1;font-size:13px;color:var(--text)}
 .todo__text.done{text-decoration:line-through;color:var(--muted)}
 .todo__date{font-size:10px;color:var(--muted)}
