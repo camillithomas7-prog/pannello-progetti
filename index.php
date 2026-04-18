@@ -33,8 +33,7 @@ html.light .lead-card{background:rgba(255,255,255,.8);border:1px solid var(--bor
 html.light .lead-stat{background:rgba(0,0,0,.03)}
 html.light .lead-stat__num{color:#111}
 html.light .lead-method{background:rgba(0,0,0,.03)}
-html.light .lead-total{background:rgba(255,255,255,.8);border:1px solid var(--border)}
-html.light .lead-total__num{color:#111}
+html.light .lead-total{background:rgba(255,255,255,.9);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.04)}
 html.light .lead-refresh{background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.1)}
 html.light .todo,.light .tool-item{background:rgba(255,255,255,.8);border:1px solid var(--border)}
 html.light .todo-form input,.light .todo-form select{background:rgba(0,0,0,.03);border:1px solid var(--border);color:#333}
@@ -71,7 +70,6 @@ html.light .note-modal__close{color:#888;background:rgba(0,0,0,.04);border:1px s
 html.light .lead-card__name{color:#111}
 html.light .lead-stat__num{color:#111}
 html.light .lead-method__num{color:#333}
-html.light .lead-total__num{color:#111}
 html.light .proj__desc{color:#666}
 html.light .proj__domain{color:var(--primary)}
 html.light .cred-val{color:#333;background:rgba(0,0,0,.05)}
@@ -506,12 +504,16 @@ html.light .proj-name{color:#333}
 .lead-refresh{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px;background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.1);border-radius:12px;color:#7c3aed;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;margin-bottom:12px}
 .lead-refresh:hover{background:rgba(124,58,237,.12);box-shadow:0 0 20px rgba(124,58,237,.1)}
 .lead-refresh.loading{opacity:.5;pointer-events:none}
-.lead-total-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-.lead-total{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center;backdrop-filter:blur(10px)}
-.lead-total__num{font-size:26px;font-weight:800}
-.lead-total__label{font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:600;margin-top:2px}
-.lt-pct{display:inline-block;margin-left:4px;padding:1px 6px;background:rgba(255,255,255,.06);border-radius:8px;font-size:9px;color:inherit;opacity:.85}
+.lead-total-bar{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:10px}
+.lead-total-bar--status{grid-template-columns:repeat(5,1fr)}
+.lead-total{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:12px 14px;text-align:left;backdrop-filter:blur(10px);overflow:hidden;transition:transform .15s,border-color .15s}
+.lead-total::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:currentColor;opacity:.6}
+.lead-total:hover{transform:translateY(-1px);border-color:rgba(124,58,237,.25)}
+.lead-total__num{font-size:24px;font-weight:800;line-height:1.1;letter-spacing:-.5px}
+.lead-total__label{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:700;letter-spacing:.4px}
+.lt-pct{display:inline-block;padding:1px 6px;background:rgba(255,255,255,.06);border-radius:6px;font-size:9px;font-weight:700;color:var(--muted);opacity:.95}
 html.light .lt-pct{background:rgba(0,0,0,.05)}
+@media(max-width:1200px){.lead-total-bar,.lead-total-bar--status{grid-template-columns:repeat(3,1fr)}}
 .lead-card__conversions{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
 .conv-box{padding:8px 6px;border-radius:10px;text-align:center;border:1px solid transparent}
 .conv-box--ok{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.2)}
@@ -660,20 +662,20 @@ html.light .lt-pct{background:rgba(0,0,0,.05)}
   <div class="lead-last-update" id="lead-last-update"></div>
 
   <div class="lead-total-bar">
-    <div class="lead-total"><div class="lead-total__num" id="lt-total" style="color:var(--white)">—</div><div class="lead-total__label">Lead Totali</div></div>
-    <div class="lead-total"><div class="lead-total__num" id="lt-nuovi" style="color:var(--red)">—</div><div class="lead-total__label">Da Contattare</div></div>
-    <div class="lead-total"><div class="lead-total__num" id="lt-oggi" style="color:var(--yellow)">—</div><div class="lead-total__label">Oggi</div></div>
-    <div class="lead-total"><div class="lead-total__num" id="lt-cod" style="color:var(--primary)">—</div><div class="lead-total__label">Contrassegno</div></div>
-    <div class="lead-total lead-total--cpl"><div class="lead-total__num" id="lt-spesa" style="color:var(--yellow)">€0</div><div class="lead-total__label">Spesa ADS</div></div>
-    <div class="lead-total lead-total--cpl"><div class="lead-total__num" id="lt-cpl" style="color:var(--cyan)">—</div><div class="lead-total__label">CPL Medio</div></div>
+    <div class="lead-total" style="color:#a78bfa"><div class="lead-total__num" id="lt-total">—</div><div class="lead-total__label">Lead Totali</div></div>
+    <div class="lead-total" style="color:#ef4444"><div class="lead-total__num" id="lt-nuovi">—</div><div class="lead-total__label">Da Contattare</div></div>
+    <div class="lead-total" style="color:#eab308"><div class="lead-total__num" id="lt-oggi">—</div><div class="lead-total__label">Oggi</div></div>
+    <div class="lead-total" style="color:#7c3aed"><div class="lead-total__num" id="lt-cod">—</div><div class="lead-total__label">Contrassegno</div></div>
+    <div class="lead-total" style="color:#f59e0b"><div class="lead-total__num" id="lt-spesa">€0</div><div class="lead-total__label">Spesa ADS</div></div>
+    <div class="lead-total" style="color:#06b6d4"><div class="lead-total__num" id="lt-cpl">—</div><div class="lead-total__label">CPL Medio</div></div>
   </div>
 
-  <div class="lead-total-bar" style="margin-top:10px">
-    <div class="lead-total"><div class="lead-total__num" id="lt-confermati" style="color:#22c55e">—</div><div class="lead-total__label">Confermati <span id="lt-confermati-pct" class="lt-pct">—</span></div></div>
-    <div class="lead-total"><div class="lead-total__num" id="lt-annullati" style="color:#ef4444">—</div><div class="lead-total__label">Annullati <span id="lt-annullati-pct" class="lt-pct">—</span></div></div>
-    <div class="lead-total"><div class="lead-total__num" id="lt-ricontattare" style="color:#f59e0b">—</div><div class="lead-total__label">Da Richiamare <span id="lt-ricontattare-pct" class="lt-pct">—</span></div></div>
-    <div class="lead-total"><div class="lead-total__num" id="lt-non-risponde" style="color:#6b7280">—</div><div class="lead-total__label">Non Risponde <span id="lt-non-risponde-pct" class="lt-pct">—</span></div></div>
-    <div class="lead-total"><div class="lead-total__num" id="lt-contattato" style="color:#3b82f6">—</div><div class="lead-total__label">Contattati <span id="lt-contattato-pct" class="lt-pct">—</span></div></div>
+  <div class="lead-total-bar lead-total-bar--status">
+    <div class="lead-total" style="color:#22c55e"><div class="lead-total__num" id="lt-confermati">—</div><div class="lead-total__label">Confermati <span id="lt-confermati-pct" class="lt-pct">—</span></div></div>
+    <div class="lead-total" style="color:#ef4444"><div class="lead-total__num" id="lt-annullati">—</div><div class="lead-total__label">Annullati <span id="lt-annullati-pct" class="lt-pct">—</span></div></div>
+    <div class="lead-total" style="color:#f59e0b"><div class="lead-total__num" id="lt-ricontattare">—</div><div class="lead-total__label">Da Richiamare <span id="lt-ricontattare-pct" class="lt-pct">—</span></div></div>
+    <div class="lead-total" style="color:#6b7280"><div class="lead-total__num" id="lt-non-risponde">—</div><div class="lead-total__label">Non Risponde <span id="lt-non-risponde-pct" class="lt-pct">—</span></div></div>
+    <div class="lead-total" style="color:#3b82f6"><div class="lead-total__num" id="lt-contattato">—</div><div class="lead-total__label">Contattati <span id="lt-contattato-pct" class="lt-pct">—</span></div></div>
   </div>
 
   <div class="lead-cards">
