@@ -1678,23 +1678,20 @@ function updateCPL(){
   document.getElementById('lt-spesa').textContent='€'+totalAds.toFixed(2);
   var avgCpl=totalLeads>0?(totalAds/totalLeads):0;
   document.getElementById('lt-cpl').textContent=totalAds>0?(avgCpl<1?'€'+avgCpl.toFixed(3):'€'+avgCpl.toFixed(2)):'—';
-  // Save to localStorage
+  // Save locally + server-sync
   var adsData={};keys.forEach(function(k){adsData[k]=parseFloat(document.getElementById('ads-'+k).value)||0});
-  localStorage.setItem('ads-spend',JSON.stringify(adsData));
+  setStore('ads-spend',adsData);
 }
-// Load saved ads spend
-(function(){
-  var saved=localStorage.getItem('ads-spend');
-  if(saved){
-    try{
-      var d=JSON.parse(saved);
-      ['seg','nails','lash'].forEach(function(k){
-        if(d[k]){document.getElementById('ads-'+k).value=d[k]}
-      });
-      updateCPL();
-    }catch(e){}
+function loadAdsFromStore(){
+  var saved=getStore('ads-spend');
+  if(saved && typeof saved==='object' && !Array.isArray(saved)){
+    ['seg','nails','lash'].forEach(function(k){
+      if(saved[k]){document.getElementById('ads-'+k).value=saved[k]}
+    });
+    updateCPL();
   }
-})();
+}
+loadAdsFromStore();
 
 // CURSOR GLOW
 var glow=document.getElementById('cursor-glow');
@@ -1898,7 +1895,6 @@ function saveTodo(id){
 function toggleTodo(id){var list=getStore('todos');var t=list.find(function(x){return x.id===id});if(t){t.done=!t.done;setStore('todos',list);renderTodos()}}
 function delTodo(id){var list=getStore('todos').filter(function(t){return t.id!==id});setStore('todos',list);renderTodos()}
 
-migrateTodosIfNeeded();
 renderProjects();
 
 // CALENDAR
@@ -2082,11 +2078,17 @@ renderLooms();
 
 // DRIVE LINKS
 var driveProjects=['seg','nails','lash'];
+function getDriveUrl(p){
+  var raw=localStorage.getItem('drive-'+p);
+  if(!raw) return '';
+  try{var parsed=JSON.parse(raw);return typeof parsed==='string'?parsed:'';}
+  catch(e){return raw;}
+}
 function renderDriveLinks(){
   var icon='<svg class="proj__drive-icon" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>';
   driveProjects.forEach(function(p){
     var el=document.getElementById('drive-'+p);if(!el)return;
-    var url=localStorage.getItem('drive-'+p)||'';
+    var url=getDriveUrl(p);
     if(url){
       el.innerHTML=icon+'<a class="proj__drive-link" href="'+url+'" target="_blank">Creative Google Drive</a><button class="proj__drive-btn-edit" onclick="editDriveLink(\''+p+'\')" title="Modifica">&#9998;</button>';
     } else {
@@ -2096,15 +2098,16 @@ function renderDriveLinks(){
 }
 function editDriveLink(p){
   var el=document.getElementById('drive-'+p);
-  var url=localStorage.getItem('drive-'+p)||'';
+  var url=getDriveUrl(p);
   el.innerHTML='<div class="proj__drive-edit"><input type="url" id="drive-input-'+p+'" value="'+url+'" placeholder="https://drive.google.com/..." onkeydown="if(event.key===\'Enter\')saveDriveLink(\''+p+'\')"><button class="proj__drive-btn-save" onclick="saveDriveLink(\''+p+'\')">Salva</button></div>';
   document.getElementById('drive-input-'+p).focus();
 }
 function saveDriveLink(p){
   var url=document.getElementById('drive-input-'+p).value.trim();
-  if(url)localStorage.setItem('drive-'+p,url); else localStorage.removeItem('drive-'+p);
+  setStore('drive-'+p, url);
   renderDriveLinks();
 }
+function loadDriveUrls(){renderDriveLinks()}
 renderDriveLinks();
 
 // THEME TOGGLE
@@ -2149,7 +2152,7 @@ function exportData(){
 }
 
 // SYNC FROM MYSQL
-fetch('api.php?key=__all__').then(function(r){return r.json()}).then(function(d){if(d&&typeof d==='object'){Object.keys(d).forEach(function(k){try{localStorage.setItem(k,typeof d[k]==='string'?d[k]:JSON.stringify(d[k]))}catch(e){}});if(typeof migrateTodosIfNeeded==='function')migrateTodosIfNeeded();if(typeof renderProjects==='function'){if(currentProjectId){renderTodos()}else{renderProjects()}}if(typeof renderTools==='function')renderTools();if(typeof bilRender==='function')bilRender();if(typeof renderNotes==='function')renderNotes();if(typeof renderLooms==='function')renderLooms()}}).catch(function(){});
+fetch('api.php?key=__all__').then(function(r){return r.json()}).then(function(d){if(d&&typeof d==='object'){Object.keys(d).forEach(function(k){try{localStorage.setItem(k,typeof d[k]==='string'?d[k]:JSON.stringify(d[k]))}catch(e){}});if(typeof migrateTodosIfNeeded==='function')migrateTodosIfNeeded();if(typeof renderProjects==='function'){if(currentProjectId){renderTodos()}else{renderProjects()}}if(typeof renderTools==='function')renderTools();if(typeof bilRender==='function')bilRender();if(typeof renderNotes==='function')renderNotes();if(typeof renderLooms==='function')renderLooms();if(typeof loadAdsFromStore==='function')loadAdsFromStore();if(typeof loadDriveUrls==='function')loadDriveUrls()}}).catch(function(){});
 // SERVICE WORKER
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){})}
 </script>
