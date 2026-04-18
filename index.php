@@ -512,15 +512,17 @@ html.light .proj-name{color:#333}
 .lead-total__label{font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:600;margin-top:2px}
 .lt-pct{display:inline-block;margin-left:4px;padding:1px 6px;background:rgba(255,255,255,.06);border-radius:8px;font-size:9px;color:inherit;opacity:.85}
 html.light .lt-pct{background:rgba(0,0,0,.05)}
-.lead-card__conversions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.lead-card__conversions{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
 .conv-box{padding:8px 6px;border-radius:10px;text-align:center;border:1px solid transparent}
 .conv-box--ok{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.2)}
 .conv-box--ko{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2)}
 .conv-box--wait{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2)}
+.conv-box--mute{background:rgba(107,114,128,.08);border-color:rgba(107,114,128,.2)}
 .conv-box__num{font-size:18px;font-weight:800}
 .conv-box--ok .conv-box__num{color:#22c55e}
 .conv-box--ko .conv-box__num{color:#ef4444}
 .conv-box--wait .conv-box__num{color:#f59e0b}
+.conv-box--mute .conv-box__num{color:#6b7280}
 .conv-box__pct{font-size:10px;font-weight:700;opacity:.8;margin-top:1px}
 .conv-box__label{font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:700;margin-top:2px}
 .lead-last-update{font-size:11px;color:var(--muted);margin-bottom:12px}
@@ -690,6 +692,7 @@ html.light .lt-pct{background:rgba(0,0,0,.05)}
         <div class="conv-box conv-box--ok"><div class="conv-box__num" id="seg-confermati">—</div><div class="conv-box__pct" id="seg-confermati-pct">—</div><div class="conv-box__label">Confermati</div></div>
         <div class="conv-box conv-box--ko"><div class="conv-box__num" id="seg-annullati">—</div><div class="conv-box__pct" id="seg-annullati-pct">—</div><div class="conv-box__label">Annullati</div></div>
         <div class="conv-box conv-box--wait"><div class="conv-box__num" id="seg-ricontattare">—</div><div class="conv-box__pct" id="seg-ricontattare-pct">—</div><div class="conv-box__label">Da Richiamare</div></div>
+        <div class="conv-box conv-box--mute"><div class="conv-box__num" id="seg-nonrisponde">—</div><div class="conv-box__pct" id="seg-nonrisponde-pct">—</div><div class="conv-box__label">Non Risponde</div></div>
       </div>
       <div class="lead-card__ads"><span class="ads-label">Spesa ADS €</span><input type="number" id="ads-seg" placeholder="0.00" step="0.01" min="0" oninput="updateCPL()"></div>
       <div class="lead-cpl"><span class="lead-cpl__label">CPL</span><span class="lead-cpl__val" id="cpl-seg">—</span></div>
@@ -711,6 +714,7 @@ html.light .lt-pct{background:rgba(0,0,0,.05)}
         <div class="conv-box conv-box--ok"><div class="conv-box__num" id="nails-confermati">—</div><div class="conv-box__pct" id="nails-confermati-pct">—</div><div class="conv-box__label">Confermati</div></div>
         <div class="conv-box conv-box--ko"><div class="conv-box__num" id="nails-annullati">—</div><div class="conv-box__pct" id="nails-annullati-pct">—</div><div class="conv-box__label">Annullati</div></div>
         <div class="conv-box conv-box--wait"><div class="conv-box__num" id="nails-ricontattare">—</div><div class="conv-box__pct" id="nails-ricontattare-pct">—</div><div class="conv-box__label">Da Richiamare</div></div>
+        <div class="conv-box conv-box--mute"><div class="conv-box__num" id="nails-nonrisponde">—</div><div class="conv-box__pct" id="nails-nonrisponde-pct">—</div><div class="conv-box__label">Non Risponde</div></div>
       </div>
       <div class="lead-card__ads"><span class="ads-label">Spesa ADS €</span><input type="number" id="ads-nails" placeholder="0.00" step="0.01" min="0" oninput="updateCPL()"></div>
       <div class="lead-cpl"><span class="lead-cpl__label">CPL</span><span class="lead-cpl__val" id="cpl-nails">—</span></div>
@@ -732,6 +736,7 @@ html.light .lt-pct{background:rgba(0,0,0,.05)}
         <div class="conv-box conv-box--ok"><div class="conv-box__num" id="lash-confermati">—</div><div class="conv-box__pct" id="lash-confermati-pct">—</div><div class="conv-box__label">Confermati</div></div>
         <div class="conv-box conv-box--ko"><div class="conv-box__num" id="lash-annullati">—</div><div class="conv-box__pct" id="lash-annullati-pct">—</div><div class="conv-box__label">Annullati</div></div>
         <div class="conv-box conv-box--wait"><div class="conv-box__num" id="lash-ricontattare">—</div><div class="conv-box__pct" id="lash-ricontattare-pct">—</div><div class="conv-box__label">Da Richiamare</div></div>
+        <div class="conv-box conv-box--mute"><div class="conv-box__num" id="lash-nonrisponde">—</div><div class="conv-box__pct" id="lash-nonrisponde-pct">—</div><div class="conv-box__label">Non Risponde</div></div>
       </div>
       <div class="lead-card__ads"><span class="ads-label">Spesa ADS €</span><input type="number" id="ads-lash" placeholder="0.00" step="0.01" min="0" oninput="updateCPL()"></div>
       <div class="lead-cpl"><span class="lead-cpl__label">CPL</span><span class="lead-cpl__val" id="cpl-lash">—</span></div>
@@ -1303,13 +1308,15 @@ function fetchAllLeads(){
       document.getElementById(ep.key+'-bon').textContent=d.bonifico||0;
       document.getElementById(ep.key+'-cod').textContent=d.contrassegno||0;
       // Conversioni
-      var conf=d.confermati||0,ann=d.annullati||0,ric=d.da_ricontattare||0;
+      var conf=d.confermati||0,ann=d.annullati||0,ric=d.da_ricontattare||0,nr=d.non_risponde||0;
       document.getElementById(ep.key+'-confermati').textContent=conf;
       document.getElementById(ep.key+'-confermati-pct').textContent=pct(conf,tot);
       document.getElementById(ep.key+'-annullati').textContent=ann;
       document.getElementById(ep.key+'-annullati-pct').textContent=pct(ann,tot);
       document.getElementById(ep.key+'-ricontattare').textContent=ric;
       document.getElementById(ep.key+'-ricontattare-pct').textContent=pct(ric,tot);
+      document.getElementById(ep.key+'-nonrisponde').textContent=nr;
+      document.getElementById(ep.key+'-nonrisponde-pct').textContent=pct(nr,tot);
 
       statusEl.textContent='Online';statusEl.className='lead-card__status lead-card__status--ok';
       agg.totali+=tot;agg.nuovi+=(d.nuovi||0);agg.oggi+=(d.oggi||0);agg.contrassegno+=(d.contrassegno||0);
