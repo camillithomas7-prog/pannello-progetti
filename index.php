@@ -591,6 +591,7 @@ html.light .lt-pct{background:rgba(0,0,0,.05)}
     <div class="nav-item" onclick="showPage('calendar',this)"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg> Calendario</div>
     <div class="nav-item" onclick="showPage('tools',this)"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Tool</div>
     <div class="nav-item" onclick="showPage('bilancio',this)"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20"/><path d="M2 15h20"/><path d="M9 3v18"/><path d="M15 3v18"/></svg> Bilancio</div>
+    <div class="nav-item" onclick="showPage('simcod',this)"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="12" y1="18" x2="14" y2="18"/><line x1="16" y1="18" x2="16" y2="18"/></svg> Simulatore COD</div>
     <div class="nav-item" onclick="showPage('loom',this)"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg> Loom</div>
     <div class="nav-item" onclick="showPage('notes',this)"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Note</div>
     <div style="padding:12px 14px;margin-top:auto;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:8px">
@@ -648,6 +649,10 @@ html.light .lt-pct{background:rgba(0,0,0,.05)}
   <div class="mob-more__item" onclick="showPage('notes',this)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
     Note
+  </div>
+  <div class="mob-more__item" onclick="showPage('simcod',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="12" y1="18" x2="14" y2="18"/></svg>
+    Simulatore COD
   </div>
 </div>
 
@@ -1269,6 +1274,12 @@ RISPOSTE RAPIDE:
   <div class="page-title">Note</div>
   <p class="page-sub">Appunti, idee e informazioni importanti</p>
   <div class="notes-grid" id="notes-grid"></div>
+</div>
+
+<div class="page" id="page-simcod">
+  <div class="page-title">Simulatore COD</div>
+  <p class="page-sub">Calcolo margini e proiezioni per ordini in contrassegno</p>
+  <iframe src="simulatore-cod.html" style="width:100%;height:calc(100vh - 200px);min-height:600px;border:1px solid var(--border);border-radius:14px;background:#fff"></iframe>
 </div>
 
 </div>
