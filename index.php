@@ -211,6 +211,27 @@ input,textarea,select,button{font-family:var(--font)}
 .proj__drive-empty{font-size:11px;color:var(--muted);cursor:pointer;padding:6px 10px;background:rgba(255,255,255,.02);border:1px dashed var(--border);border-radius:6px;transition:border-color .2s;flex:1;text-align:center}
 .proj__drive-empty:hover{border-color:rgba(124,58,237,.2)}
 
+/* FILE UPLOADER */
+.proj__files{margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
+.proj__files-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+.proj__files-count{background:var(--border);color:var(--text);padding:1px 8px;border-radius:999px;font-size:10px}
+.proj__files-drop{display:block;border:1.5px dashed var(--border);border-radius:8px;padding:14px;text-align:center;color:var(--muted);font-size:12px;cursor:pointer;transition:border-color .2s,background .2s,color .2s;user-select:none}
+.proj__files-drop:hover,.proj__files-drop.dragover{border-color:var(--accent);background:rgba(124,58,237,.06);color:var(--accent)}
+.proj__files-drop strong{font-weight:700}
+.proj__files-list{display:grid;gap:6px;margin-top:10px}
+.proj__files-empty{color:var(--muted);font-size:11px;padding:8px;text-align:center;opacity:.6}
+.proj__file-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;transition:background .15s,border-color .15s}
+.proj__file-row:hover{background:rgba(124,58,237,.04);border-color:rgba(124,58,237,.15)}
+.proj__file-icon{font-size:18px;flex-shrink:0;line-height:1}
+.proj__file-info{flex:1;min-width:0}
+.proj__file-name{color:var(--text);font-weight:600;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.proj__file-meta{color:var(--muted);font-size:10px}
+.proj__file-actions{display:flex;gap:2px;flex-shrink:0}
+.proj__file-btn{background:none;border:0;color:var(--muted);cursor:pointer;padding:5px 8px;border-radius:5px;font-size:14px;line-height:1;text-decoration:none;transition:color .15s,background .15s}
+.proj__file-btn:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.proj__file-btn--del:hover{color:#ef4444;background:rgba(239,68,68,.1)}
+.proj__files-busy{opacity:.6;pointer-events:none}
+
 /* COMPETITOR TRACKER */
 .comp-form{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
 .comp-form input,.comp-form textarea{flex:1;min-width:200px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;color:rgba(255,255,255,.8);font-size:13px;outline:none;transition:border-color .2s}
@@ -775,6 +796,7 @@ html.light .lt-pct{background:rgba(0,0,0,.05)}
       </div>
       <div class="proj__cmd">Locale: <code>~/funnel-segretarie</code></div>
       <div class="proj__drive" id="drive-seg"></div>
+      <div class="proj__files" data-project="seg"></div>
       <div class="wa-accordion" onclick="this.classList.toggle('open')">
         <div class="wa-accordion__header"><span>Messaggio WhatsApp pronto da inviare</span><span class="wa-accordion__arrow">&#9660;</span></div>
         <div class="wa-accordion__body"><div class="wa-accordion__body-inner">
@@ -878,6 +900,7 @@ RISPOSTE RAPIDE:
       </div>
       <div class="proj__cmd">Locale: <code>~/funnel-nails</code></div>
       <div class="proj__drive" id="drive-nails"></div>
+      <div class="proj__files" data-project="nails"></div>
       <div class="wa-accordion" onclick="this.classList.toggle('open')">
         <div class="wa-accordion__header"><span>Messaggio WhatsApp pronto da inviare</span><span class="wa-accordion__arrow">&#9660;</span></div>
         <div class="wa-accordion__body"><div class="wa-accordion__body-inner">
@@ -982,6 +1005,7 @@ RISPOSTE RAPIDE:
       </div>
       <div class="proj__cmd">Locale: <code>~/funnel-lash</code></div>
       <div class="proj__drive" id="drive-lash"></div>
+      <div class="proj__files" data-project="lash"></div>
       <div class="wa-accordion" onclick="this.classList.toggle('open')">
         <div class="wa-accordion__header"><span>Messaggio WhatsApp pronto da inviare</span><span class="wa-accordion__arrow">&#9660;</span></div>
         <div class="wa-accordion__body"><div class="wa-accordion__body-inner">
@@ -1087,6 +1111,7 @@ RISPOSTE RAPIDE:
         <div class="cred"><span class="cred-label">SSH</span><span class="cred-val">root@204.168.179.247</span></div>
       </div>
       <div class="proj__cmd">Server: <code>/root/ai-phone-agent</code></div>
+      <div class="proj__files" data-project="ai-phone"></div>
     </div>
 
     <div class="proj">
@@ -1104,6 +1129,7 @@ RISPOSTE RAPIDE:
         <div class="cred"><span class="cred-label">API JSON</span><span class="cred-val">/ba/api/ask POST {question, token}</span></div>
       </div>
       <div class="proj__cmd">Server: <code>/root/business-assistant</code></div>
+      <div class="proj__files" data-project="ba"></div>
     </div>
 
     <div class="proj">
@@ -1115,6 +1141,7 @@ RISPOSTE RAPIDE:
       </div>
       <div class="proj__cmd">Locale: <code>~/fresh-iq-clone-app</code> — Build: <code>npm run build</code> (deploy via branch <code>deploy</code>)</div>
       <div class="proj__drive" id="drive-fresh"></div>
+      <div class="proj__files" data-project="fresh"></div>
     </div>
 
     <div class="proj">
@@ -1126,6 +1153,7 @@ RISPOSTE RAPIDE:
         <a href="https://reviewshieldita.lovable.app" target="_blank" class="btn-link btn-admin">Originale</a>
       </div>
       <div class="proj__cmd">Locale: <code>~/reviewshield</code> — Avvia: <code>cd ~/reviewshield && python3 -m http.server 8897</code></div>
+      <div class="proj__files" data-project="rs"></div>
     </div>
 
     <div class="proj">
@@ -1136,6 +1164,7 @@ RISPOSTE RAPIDE:
         <a href="http://localhost:8898" target="_blank" class="btn-link btn-site">Locale :8898</a>
       </div>
       <div class="proj__cmd">Locale: <code>~/reviewshield-broad</code> — Avvia: <code>cd ~/reviewshield-broad && python3 -m http.server 8898</code></div>
+      <div class="proj__files" data-project="rs-broad"></div>
     </div>
 
   </div>
@@ -2131,6 +2160,106 @@ function saveDriveLink(p){
 }
 function loadDriveUrls(){renderDriveLinks()}
 renderDriveLinks();
+
+// FILE UPLOADER (server-side multipart)
+(function(){
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function fmtSize(b){
+    if(b<1024)return b+' B';
+    if(b<1048576)return (b/1024).toFixed(1)+' KB';
+    if(b<1073741824)return (b/1048576).toFixed(1)+' MB';
+    return (b/1073741824).toFixed(2)+' GB';
+  }
+  function iconFor(name){
+    var ext=(name.split('.').pop()||'').toLowerCase();
+    if(['jpg','jpeg','png','gif','webp','svg','heic','avif','bmp','ico'].indexOf(ext)>-1)return '🖼️';
+    if(['mp4','mov','avi','webm','mkv','m4v'].indexOf(ext)>-1)return '🎬';
+    if(['mp3','wav','ogg','m4a','flac','aac'].indexOf(ext)>-1)return '🎵';
+    if(ext==='pdf')return '📕';
+    if(['doc','docx','odt','rtf'].indexOf(ext)>-1)return '📝';
+    if(['xls','xlsx','csv','ods','numbers'].indexOf(ext)>-1)return '📊';
+    if(['ppt','pptx','key','odp'].indexOf(ext)>-1)return '📊';
+    if(['zip','rar','7z','tar','gz','bz2'].indexOf(ext)>-1)return '📦';
+    if(['txt','md','log','json','yml','yaml','xml'].indexOf(ext)>-1)return '📄';
+    if(['js','ts','jsx','tsx','html','htm','css','scss','py','go','rs','java','c','cpp','php','sh'].indexOf(ext)>-1)return '💻';
+    if(['ai','psd','sketch','fig','xd'].indexOf(ext)>-1)return '🎨';
+    return '📎';
+  }
+  function render(el, files){
+    var key=el.dataset.project;
+    var rows=files.length
+      ? files.map(function(f){
+          return '<div class="proj__file-row">'
+            +'<span class="proj__file-icon">'+iconFor(f.name)+'</span>'
+            +'<div class="proj__file-info">'
+            +'<span class="proj__file-name" title="'+esc(f.name)+'">'+esc(f.name)+'</span>'
+            +'<span class="proj__file-meta">'+fmtSize(f.size)+'</span>'
+            +'</div>'
+            +'<div class="proj__file-actions">'
+            +'<a class="proj__file-btn" href="'+f.url+'" target="_blank" title="Apri">↗</a>'
+            +'<a class="proj__file-btn" href="'+f.url+'" download="'+esc(f.name)+'" title="Scarica">⬇</a>'
+            +'<button class="proj__file-btn proj__file-btn--del" data-del="'+esc(f.file)+'" title="Elimina">🗑</button>'
+            +'</div>'
+            +'</div>';
+        }).join('')
+      : '<div class="proj__files-empty">Nessun file caricato</div>';
+    el.innerHTML=
+      '<div class="proj__files-head"><span>📁 File di lavoro</span><span class="proj__files-count">'+files.length+'</span></div>'
+      +'<label class="proj__files-drop"><input type="file" multiple style="display:none">'
+      +'<span class="proj__files-drop-text"><strong>+ Carica file</strong> — clicca o trascina qui (immagini, PDF, video, documenti…)</span>'
+      +'</label>'
+      +'<div class="proj__files-list">'+rows+'</div>';
+    var input=el.querySelector('input[type=file]');
+    var drop=el.querySelector('.proj__files-drop');
+    input.addEventListener('change',function(){ if(input.files.length) upload(el,input.files); });
+    drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('dragover');});
+    drop.addEventListener('dragleave',function(){drop.classList.remove('dragover');});
+    drop.addEventListener('drop',function(e){
+      e.preventDefault();drop.classList.remove('dragover');
+      if(e.dataTransfer.files.length) upload(el,e.dataTransfer.files);
+    });
+    el.querySelectorAll('button[data-del]').forEach(function(b){
+      b.addEventListener('click',function(){
+        var name=b.closest('.proj__file-row').querySelector('.proj__file-name').textContent;
+        if(!confirm('Eliminare "'+name+'" ?'))return;
+        var fd=new FormData();
+        fd.append('_method','DELETE');
+        fd.append('project',key);
+        fd.append('file',b.dataset.del);
+        el.classList.add('proj__files-busy');
+        fetch('files.php',{method:'POST',body:fd,credentials:'same-origin'})
+          .then(function(){load(el);})
+          .catch(function(){load(el);});
+      });
+    });
+  }
+  function load(el){
+    var key=el.dataset.project;
+    fetch('files.php?project='+encodeURIComponent(key),{credentials:'same-origin'})
+      .then(function(r){return r.json();})
+      .then(function(d){ el.classList.remove('proj__files-busy'); render(el, (d&&d.files)?d.files:[]); })
+      .catch(function(){ el.classList.remove('proj__files-busy'); render(el, []); });
+  }
+  function upload(el, files){
+    var key=el.dataset.project;
+    var fd=new FormData();
+    fd.append('project',key);
+    for(var i=0;i<files.length;i++) fd.append('files[]', files[i]);
+    var drop=el.querySelector('.proj__files-drop-text');
+    if(drop) drop.innerHTML='<strong>Caricamento in corso…</strong>';
+    el.classList.add('proj__files-busy');
+    fetch('upload.php',{method:'POST',body:fd,credentials:'same-origin'})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(d && d.errors && d.errors.length){
+          alert('Alcuni file bloccati:\n'+d.errors.map(function(e){return e.name+' ('+e.error+')';}).join('\n'));
+        }
+        load(el);
+      })
+      .catch(function(){load(el);});
+  }
+  document.querySelectorAll('.proj__files').forEach(load);
+})();
 
 // THEME TOGGLE
 function toggleTheme(){
