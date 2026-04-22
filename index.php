@@ -1114,6 +1114,7 @@ RISPOSTE RAPIDE:
         <a href="https://lightskyblue-tarsier-967570.hostingersite.com" target="_blank" class="btn-link btn-site">Sito</a>
       </div>
       <div class="proj__cmd">Locale: <code>~/fresh-iq-clone-app</code> — Build: <code>npm run build</code> (deploy via branch <code>deploy</code>)</div>
+      <div class="proj__drive" id="drive-fresh"></div>
     </div>
 
     <div class="proj">
@@ -2098,7 +2099,7 @@ function saveLoomNotes(i){
 renderLooms();
 
 // DRIVE LINKS
-var driveProjects=['seg','nails','lash'];
+var driveProjects=['seg','nails','lash','fresh'];
 function getDriveUrl(p){
   var raw=localStorage.getItem('drive-'+p);
   if(!raw) return '';
