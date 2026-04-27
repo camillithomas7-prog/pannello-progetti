@@ -2364,28 +2364,31 @@ window.addEventListener('focus',function(){pullFromServer(false)});
 // PANEL SWITCHER VISIBILITY
 async function loadPanelsHidden(){
   try{
-    const res=await fetch('panels-hidden.php',{cache:'no-store'});
+    const res=await fetch('panels-hidden.php?_t='+Date.now(),{cache:'no-store'});
     const data=await res.json();
     const hidden=Array.isArray(data.hidden)?data.hidden:[];
+    const hSet={};hidden.forEach(function(h){hSet[String(h).toLowerCase()]=true});
     document.querySelectorAll('input[data-admin-host]').forEach(function(cb){
-      cb.checked=!hidden.includes(cb.dataset.adminHost);
+      cb.checked=!hSet[cb.dataset.adminHost.toLowerCase()];
     });
   }catch(e){}
 }
 async function togglePanelHost(cb){
   const label=cb.closest('.panel-toggle');
   if(label) label.classList.add('saving');
+  const host=cb.dataset.adminHost.toLowerCase();
+  const wantHidden=!cb.checked;
   try{
-    const res=await fetch('panels-hidden.php',{cache:'no-store'});
+    const res=await fetch('panels-hidden.php?_t='+Date.now(),{cache:'no-store'});
     const data=await res.json();
     let hidden=Array.isArray(data.hidden)?data.hidden:[];
-    const host=cb.dataset.adminHost;
-    hidden=hidden.filter(function(h){return h!==host});
-    if(!cb.checked) hidden.push(host);
-    await fetch('panels-hidden.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hidden:hidden})});
+    hidden=hidden.map(function(h){return String(h).toLowerCase()}).filter(function(h){return h!==host});
+    if(wantHidden) hidden.push(host);
+    const post=await fetch('panels-hidden.php',{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({hidden:hidden})});
+    if(!post.ok) throw new Error('http '+post.status);
   }catch(e){
     cb.checked=!cb.checked;
-    alert('Errore salvataggio. Riprova.');
+    alert('Errore salvataggio: '+e.message);
   }finally{
     if(label) label.classList.remove('saving');
   }
