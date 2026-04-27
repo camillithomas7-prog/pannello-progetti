@@ -3,7 +3,7 @@ session_start();
 require_once 'config.php';
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (($_POST['pass'] ?? '') === APP_PASS) {
+    if (($_POST['pass'] ?? '') === 'Digital2026') {
         $_SESSION['authed'] = true;
         header('Location: index.php');
         exit;
