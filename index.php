@@ -1285,6 +1285,7 @@ RISPOSTE RAPIDE:
     </select>
     <input type="email" id="tool-email" placeholder="Email accesso" style="min-width:160px">
     <input type="text" id="tool-pw" placeholder="Password" style="min-width:120px">
+    <input type="text" id="tool-2fa" placeholder="2FA (opzionale)" style="min-width:120px">
     <button onclick="addTool()">Aggiungi</button>
   </div>
 
@@ -1665,10 +1666,11 @@ function renderTools(){
     var tagLabel=t.type==='mensile'?'Mensile':'Singolo';
     if(t.type==='mensile') totalMensile+=t.amount; else totalSingolo+=t.amount;
     var credsHtml='';
-    if(t.email||t.pw){
+    if(t.email||t.pw||t.tfa){
       credsHtml='<div class="tool-item__creds">';
       if(t.email)credsHtml+='<span>Email: <code onclick="navigator.clipboard.writeText(\''+t.email+'\')">'+t.email+'</code></span>';
       if(t.pw)credsHtml+='<span>PW: <code onclick="navigator.clipboard.writeText(\''+t.pw+'\')">'+t.pw+'</code></span>';
+      if(t.tfa)credsHtml+='<span>2FA: <code onclick="navigator.clipboard.writeText(\''+t.tfa+'\')">'+t.tfa+'</code></span>';
       credsHtml+='</div>';
     }
     html+='<div class="tool-item" style="flex-wrap:wrap">'
@@ -1694,15 +1696,17 @@ function addTool(){
   var type=document.getElementById('tool-type').value;
   var email=document.getElementById('tool-email').value.trim();
   var pw=document.getElementById('tool-pw').value.trim();
+  var tfa=document.getElementById('tool-2fa').value.trim();
   if(!name||!amount)return;
   var list=getStore('tools');
-  list.unshift({name:name,amount:amount,date:date,type:type,email:email,pw:pw});
+  list.unshift({name:name,amount:amount,date:date,type:type,email:email,pw:pw,tfa:tfa});
   setStore('tools',list);
   document.getElementById('tool-name').value='';
   document.getElementById('tool-amount').value='';
   document.getElementById('tool-date').value='';
   document.getElementById('tool-email').value='';
   document.getElementById('tool-pw').value='';
+  document.getElementById('tool-2fa').value='';
   renderTools();if(typeof bilRender==='function')bilRender();
 }
 function delTool(i){var list=getStore('tools');list.splice(i,1);setStore('tools',list);renderTools();if(typeof bilRender==='function')bilRender()}
@@ -1713,12 +1717,14 @@ function editTool(i){
   var newType=prompt('Tipo (mensile/singolo):',t.type);if(newType===null)return;
   var newEmail=prompt('Email accesso:',t.email||'');if(newEmail===null)return;
   var newPw=prompt('Password:',t.pw||'');if(newPw===null)return;
+  var newTfa=prompt('2FA (opzionale):',t.tfa||'');if(newTfa===null)return;
   if(newType!=='mensile'&&newType!=='singolo')newType=t.type;
   list[i].name=newName.trim()||t.name;
   list[i].amount=parseFloat(newAmount)||t.amount;
   list[i].type=newType;
   list[i].email=newEmail.trim();
   list[i].pw=newPw.trim();
+  list[i].tfa=newTfa.trim();
   setStore('tools',list);renderTools();if(typeof bilRender==='function')bilRender();
 }
 // Set default date to today
