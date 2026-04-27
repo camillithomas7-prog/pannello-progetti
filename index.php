@@ -180,6 +180,16 @@ input,textarea,select,button{font-family:var(--font)}
 .tag{padding:3px 12px;border-radius:20px;font-size:10px;font-weight:700}
 .tag-live{background:rgba(34,197,94,0.1);color:var(--green);border:1px solid rgba(34,197,94,.15)}
 .tag-local{background:rgba(234,179,8,0.1);color:var(--yellow);border:1px solid rgba(234,179,8,.15)}
+.panel-toggle{display:inline-flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);cursor:pointer;user-select:none;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:rgba(255,255,255,.02);transition:all .2s}
+.panel-toggle:hover{border-color:rgba(124,58,237,.3);color:var(--white)}
+.panel-toggle__switch{position:relative;width:30px;height:16px;background:rgba(255,255,255,.1);border-radius:10px;transition:background .2s;flex-shrink:0}
+.panel-toggle__switch::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;background:#fff;border-radius:50%;transition:transform .2s}
+.panel-toggle input{display:none}
+.panel-toggle input:checked + .panel-toggle__switch{background:#22c55e}
+.panel-toggle input:checked + .panel-toggle__switch::after{transform:translateX(14px)}
+.panel-toggle.saving{opacity:.5;pointer-events:none}
+html.light .panel-toggle{background:rgba(0,0,0,.02)}
+html.light .panel-toggle__switch{background:rgba(0,0,0,.1)}
 .proj__domain{font-size:12px;color:var(--primary);margin-bottom:12px;word-break:break-all}
 .proj__desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
 .proj__links{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
@@ -780,7 +790,7 @@ html.light .lt-pct{background:rgba(0,0,0,.05)}
   <div class="projects">
 
     <div class="proj">
-      <div class="proj__top"><div class="proj__name">Funnel Segretarie</div><span class="tag tag-live">LIVE</span></div>
+      <div class="proj__top"><div class="proj__name">Funnel Segretarie</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><label class="panel-toggle" title="Mostra/nascondi nel pannello switcher degli admin"><input type="checkbox" data-admin-host="aliceblue-dragonfly-326952.hostingersite.com" onchange="togglePanelHost(this)"><span class="panel-toggle__switch"></span><span>Pannello</span></label><span class="tag tag-live">LIVE</span></div></div>
       <div class="proj__domain">aliceblue-dragonfly-326952.hostingersite.com</div>
       <div class="proj__desc">Corso Segretaria Professionale + Inserimento Lavorativo. Form candidatura, bonifico/contrassegno, pixel Facebook, WhatsApp.</div>
       <div class="proj__links">
@@ -884,7 +894,7 @@ RISPOSTE RAPIDE:
     </div>
 
     <div class="proj">
-      <div class="proj__top"><div class="proj__name">Funnel Corso Unghie</div><span class="tag tag-live">LIVE</span></div>
+      <div class="proj__top"><div class="proj__name">Funnel Corso Unghie</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><label class="panel-toggle" title="Mostra/nascondi nel pannello switcher degli admin"><input type="checkbox" data-admin-host="mediumturquoise-mule-624710.hostingersite.com" onchange="togglePanelHost(this)"><span class="panel-toggle__switch"></span><span>Pannello</span></label><span class="tag tag-live">LIVE</span></div></div>
       <div class="proj__domain">mediumturquoise-mule-624710.hostingersite.com</div>
       <div class="proj__desc">Corso Ricostruzione Unghie. Lezioni teoriche/pratiche accordion, certificato, form candidatura.</div>
       <div class="proj__links">
@@ -989,7 +999,7 @@ RISPOSTE RAPIDE:
     </div>
 
     <div class="proj">
-      <div class="proj__top"><div class="proj__name">Lash Art Academy</div><span class="tag tag-live">LIVE</span></div>
+      <div class="proj__top"><div class="proj__name">Lash Art Academy</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><label class="panel-toggle" title="Mostra/nascondi nel pannello switcher degli admin"><input type="checkbox" data-admin-host="darkred-koala-809285.hostingersite.com" onchange="togglePanelHost(this)"><span class="panel-toggle__switch"></span><span>Pannello</span></label><span class="tag tag-live">LIVE</span></div></div>
       <div class="proj__domain">darkred-koala-809285.hostingersite.com</div>
       <div class="proj__desc">Corso Extension Ciglia — 4 tecniche. VSL Vimeo, timer 48h, scarcity 3/15 posti, 4 certificati, design luxury nero/oro.</div>
       <div class="proj__links">
@@ -1157,7 +1167,7 @@ RISPOSTE RAPIDE:
     </div>
 
     <div class="proj">
-      <div class="proj__top"><div class="proj__name">ReviewShield Broad</div><span class="tag tag-local">LOCALE</span></div>
+      <div class="proj__top"><div class="proj__name">ReviewShield Broad</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><label class="panel-toggle" title="Mostra/nascondi nel pannello switcher degli admin"><input type="checkbox" data-admin-host="midnightblue-pony-128540.hostingersite.com" onchange="togglePanelHost(this)"><span class="panel-toggle__switch"></span><span>Pannello</span></label><span class="tag tag-local">LOCALE</span></div></div>
       <div class="proj__domain">Versione broad (tutti i settori)</div>
       <div class="proj__desc">Versione generalista di ReviewShield. Rimozione recensioni negative per qualsiasi attività: ristoranti, hotel, studi professionali, negozi, ecc. Immagini generate con Seedream.</div>
       <div class="proj__links">
@@ -2351,6 +2361,36 @@ pullFromServer(true);
 setInterval(function(){pullFromServer(false)},5000);
 // Also pull when tab regains focus (more responsive after context switch)
 window.addEventListener('focus',function(){pullFromServer(false)});
+// PANEL SWITCHER VISIBILITY
+async function loadPanelsHidden(){
+  try{
+    const res=await fetch('panels-hidden.php',{cache:'no-store'});
+    const data=await res.json();
+    const hidden=Array.isArray(data.hidden)?data.hidden:[];
+    document.querySelectorAll('input[data-admin-host]').forEach(function(cb){
+      cb.checked=!hidden.includes(cb.dataset.adminHost);
+    });
+  }catch(e){}
+}
+async function togglePanelHost(cb){
+  const label=cb.closest('.panel-toggle');
+  if(label) label.classList.add('saving');
+  try{
+    const res=await fetch('panels-hidden.php',{cache:'no-store'});
+    const data=await res.json();
+    let hidden=Array.isArray(data.hidden)?data.hidden:[];
+    const host=cb.dataset.adminHost;
+    hidden=hidden.filter(function(h){return h!==host});
+    if(!cb.checked) hidden.push(host);
+    await fetch('panels-hidden.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hidden:hidden})});
+  }catch(e){
+    cb.checked=!cb.checked;
+    alert('Errore salvataggio. Riprova.');
+  }finally{
+    if(label) label.classList.remove('saving');
+  }
+}
+loadPanelsHidden();
 // SERVICE WORKER
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){})}
 </script>
