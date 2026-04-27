@@ -1697,7 +1697,8 @@ function addTool(){
   var email=document.getElementById('tool-email').value.trim();
   var pw=document.getElementById('tool-pw').value.trim();
   var tfa=document.getElementById('tool-2fa').value.trim();
-  if(!name||!amount)return;
+  if(!name)return;
+  if(isNaN(amount)||amount<0)amount=0;
   var list=getStore('tools');
   list.unshift({name:name,amount:amount,date:date,type:type,email:email,pw:pw,tfa:tfa});
   setStore('tools',list);
