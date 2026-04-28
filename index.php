@@ -603,6 +603,38 @@ html.light .lt-pct{background:rgba(0,0,0,.05)}
   .bil-cell-pop{left:8px!important;right:8px;width:auto!important;min-width:0!important}
   #cursor-glow,.grid-overlay{display:none}
 }
+/* DOC PAGES (SOP / Script Vendita) */
+.doc-back{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:10px;font-size:12px;cursor:pointer;text-decoration:none;font-family:inherit;transition:all .2s}
+.doc-back:hover{background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.3);color:var(--accent)}
+.doc-banner{background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(6,182,212,.08));border:1px solid rgba(124,58,237,.2);border-radius:12px;padding:14px 18px;font-size:13px;color:var(--text);margin:14px 0 22px;line-height:1.6}
+.doc-banner strong{color:var(--accent);font-weight:700}
+.doc-toc{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:16px 22px;margin-bottom:30px}
+.doc-toc strong{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.doc-toc ol{margin:0;padding-left:20px;color:var(--text);font-size:13px;line-height:1.9}
+.doc-toc a{color:var(--text);text-decoration:none;transition:color .15s}
+.doc-toc a:hover{color:var(--accent)}
+.doc-h2{font-size:18px;font-weight:700;color:var(--white);margin:28px 0 8px;padding-bottom:8px;border-bottom:1px solid var(--border);scroll-margin-top:20px}
+.doc-h2 .doc-emoji{font-size:18px;margin-right:6px}
+.doc-h3{font-size:14px;font-weight:700;color:var(--white);margin:18px 0 6px}
+.doc-h4{font-size:13px;font-weight:600;color:var(--text);margin:12px 0 4px;text-transform:uppercase;letter-spacing:.04em}
+.doc-page p{font-size:13px;color:var(--text);line-height:1.7;margin:6px 0 10px}
+.doc-page ul,.doc-page ol{font-size:13px;color:var(--text);line-height:1.7;padding-left:22px;margin:6px 0 12px}
+.doc-page li{margin-bottom:4px}
+.doc-page strong{color:var(--white);font-weight:700}
+.doc-page em{color:var(--muted);font-style:normal;background:rgba(255,255,255,.04);padding:1px 6px;border-radius:4px;font-size:12px}
+.doc-page code{background:rgba(124,58,237,.1);color:var(--accent);padding:2px 6px;border-radius:4px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
+.doc-table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0 16px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.doc-table th{background:rgba(124,58,237,.08);color:var(--white);text-align:left;padding:10px 12px;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--border)}
+.doc-table td{padding:10px 12px;color:var(--text);border-bottom:1px solid var(--border);vertical-align:top}
+.doc-table tr:last-child td{border-bottom:0}
+.doc-quote{background:rgba(34,197,94,.06);border-left:3px solid #22c55e;padding:10px 16px;margin:10px 0;border-radius:6px;font-size:13px;color:var(--text);line-height:1.6;font-style:italic}
+.doc-quote.doc-quote--alert{background:rgba(239,68,68,.06);border-left-color:#ef4444}
+.doc-quote.doc-quote--key{background:rgba(124,58,237,.08);border-left-color:#7c3aed;font-style:normal;font-weight:600}
+.doc-script{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin:8px 0 14px}
+.doc-script .doc-script__label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:700;margin-bottom:6px;display:block}
+.doc-script .doc-script__text{font-size:13px;color:var(--text);line-height:1.7;font-style:italic}
+.doc-page hr{border:0;border-top:1px solid var(--border);margin:28px 0}
+.doc-badge{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;background:rgba(124,58,237,.15);color:#7c3aed;margin-left:8px}
 </style>
 </head>
 <body>
@@ -1162,8 +1194,8 @@ RISPOSTE RAPIDE:
         <a href="http://localhost:8897" target="_blank" class="btn-link btn-site">Locale :8897</a>
         <a href="https://reviewshieldita.lovable.app" target="_blank" class="btn-link btn-admin">Originale</a>
         <a href="https://reviewshieldita.lovable.app/admin/dashboard" target="_blank" class="btn-link btn-admin">Dashboard Lead</a>
-        <a href="https://github.com/camillithomas7-prog/pannello-progetti/blob/master/docs/reviewshield/sop.md" target="_blank" class="btn-link btn-admin">📋 SOP</a>
-        <a href="https://github.com/camillithomas7-prog/pannello-progetti/blob/master/docs/reviewshield/script-vendita.md" target="_blank" class="btn-link btn-admin">💬 Script Vendita</a>
+        <a href="javascript:void(0)" onclick="showPage('sop-rs')" class="btn-link btn-admin">📋 SOP</a>
+        <a href="javascript:void(0)" onclick="showPage('script-rs')" class="btn-link btn-admin">💬 Script Vendita</a>
       </div>
       <div class="proj__cmd">Locale: <code>~/reviewshield</code> — Avvia: <code>cd ~/reviewshield && python3 -m http.server 8897</code></div>
       <div class="proj__files" data-project="rs"></div>
@@ -1334,6 +1366,675 @@ RISPOSTE RAPIDE:
   <div class="page-title">Simulatore COD</div>
   <p class="page-sub">Calcolo margini e proiezioni per ordini in contrassegno</p>
   <iframe src="simulatore-cod.html" style="width:100%;height:calc(100vh - 200px);min-height:600px;border:1px solid var(--border);border-radius:14px;background:#fff"></iframe>
+</div>
+
+<!-- ==================== SOP REVIEWSHIELD ==================== -->
+<div class="page doc-page" id="page-sop-rs">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+    <button class="doc-back" onclick="showPage('live')">&larr; Torna a Progetti</button>
+    <span class="doc-badge">ReviewShield</span>
+  </div>
+  <div class="page-title">📋 SOP — ReviewShield</div>
+  <p class="page-sub">Procedure operative dal lead alla rimozione e all'incasso. Target: chirurghi plastici, medici estetici, dermatologi.</p>
+
+  <div class="doc-banner">
+    <strong>Modello base:</strong> il cliente paga <strong>solo dopo</strong> che la recensione è sparita dal profilo. Mai pagamenti anticipati. Se non riusciamo, costo zero. Questa è la nostra arma di vendita più potente — non si tradisce mai.
+  </div>
+
+  <div class="doc-toc">
+    <strong>Indice</strong>
+    <ol>
+      <li><a href="#sop-ruoli">Ruoli</a></li>
+      <li><a href="#sop-01">SOP-01 — Assegnazione lead a blocchi</a></li>
+      <li><a href="#sop-02">SOP-02 — Pre-qualifica del profilo Google</a></li>
+      <li><a href="#sop-03">SOP-03 — Primo contatto (telefono / WhatsApp)</a></li>
+      <li><a href="#sop-04">SOP-04 — Registrazione chiamata obbligatoria 🎙</a></li>
+      <li><a href="#sop-05">SOP-05 — Demo / Chiamata di vendita</a></li>
+      <li><a href="#sop-06">SOP-06 — Chiusura e invio link Stripe</a></li>
+      <li><a href="#sop-07">SOP-07 — Passaggio al team operativo</a></li>
+      <li><a href="#sop-08">SOP-08 — Lavorazione e aggiornamenti al cliente</a></li>
+      <li><a href="#sop-09">SOP-09 — Conferma rimozione + incasso</a></li>
+      <li><a href="#sop-10">SOP-10 — Upsell post-vendita</a></li>
+      <li><a href="#sop-11">SOP-11 — Casi limite e contestazioni</a></li>
+      <li><a href="#sop-12">SOP-12 — Reportistica per venditore 📊</a></li>
+      <li><a href="#sop-numeri">Numeri ufficiali da citare</a></li>
+    </ol>
+  </div>
+
+  <h2 class="doc-h2" id="sop-ruoli">Ruoli</h2>
+  <table class="doc-table">
+    <thead><tr><th>Ruolo</th><th>Chi</th><th>Cosa fa</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Owner</strong></td><td>Samuele + Thomas</td><td>Assegna i blocchi di lead, controlla performance, ascolta a campione le chiamate registrate, riceve incassi via Stripe</td></tr>
+      <tr><td><strong>Venditore</strong></td><td>Closer esterno</td><td>Riceve i lead già assegnati, contatta, vende, <strong>registra ogni chiamata</strong></td></tr>
+      <tr><td><strong>Team Analisti / Legale</strong></td><td>Operatori interni</td><td>Costruiscono il dossier tecnico-legale, segnalano a Google</td></tr>
+      <tr><td><strong>Account Manager</strong></td><td>Operatore dedicato</td><td>Aggiorna il cliente ogni 48h, gestisce conferme rimozione</td></tr>
+    </tbody>
+  </table>
+  <p>Sam e Thomas <strong>non parlano mai coi clienti</strong>. Assegnano lead, controllano report, ascoltano a campione chiamate per coaching.</p>
+
+  <h2 class="doc-h2" id="sop-01">SOP-01 — Assegnazione lead a blocchi</h2>
+  <p>I lead vengono assegnati <strong>dal proprietario (Sam) a blocchi</strong>, dalla dashboard <code>reviewshieldita.lovable.app/admin/dashboard</code>. Il venditore <strong>non sceglie</strong> — lavora i lead che gli vengono assegnati.</p>
+
+  <h3 class="doc-h3">Procedura assegnazione (lato Sam)</h3>
+  <ol>
+    <li>Sam apre la dashboard.</li>
+    <li>Filtra i lead per priorità:
+      <ul>
+        <li><strong>ALTA</strong>: rating Google tra <strong>3.5 e 4.3</strong> (zona dove ogni recensione negativa pesa di più).</li>
+        <li><strong>MEDIA</strong>: rating tra 4.4 e 4.6, almeno 3 recensioni 1-2 stelle.</li>
+        <li><strong>BASSA</strong>: rating ≥ 4.7 (utile per Monitoraggio Continuo).</li>
+      </ul>
+    </li>
+    <li>Seleziona un blocco di <strong>20–50 lead</strong>.</li>
+    <li>Assegna il blocco a un venditore specifico.</li>
+    <li>Il venditore vedrà nella sua dashboard SOLO i lead a lui assegnati.</li>
+  </ol>
+
+  <h3 class="doc-h3">Procedura lavorazione (lato venditore)</h3>
+  <ol>
+    <li>Il venditore apre la dashboard, vede solo i suoi lead.</li>
+    <li>Stati possibili per ogni lead:
+      <ul>
+        <li><code>Da contattare</code> (default)</li>
+        <li><code>Contattato — in attesa risposta</code></li>
+        <li><code>Demo fissata</code></li>
+        <li><code>Demo fatta — in attesa decisione</code></li>
+        <li><code>Chiuso</code> (vendita andata)</li>
+        <li><code>Rifiutato</code></li>
+        <li><code>Non risponde / Numero errato</code></li>
+      </ul>
+    </li>
+    <li>Il venditore aggiorna lo stato dopo ogni interazione.</li>
+    <li><strong>Tempistica</strong>: ogni lead assegnato dev'essere lavorato (almeno primo contatto) entro <strong>48 ore</strong>.</li>
+  </ol>
+
+  <h2 class="doc-h2" id="sop-02">SOP-02 — Pre-qualifica del profilo Google</h2>
+  <p>Da fare <strong>prima di chiamare</strong>, ogni volta. Tempo: 5–7 minuti per profilo.</p>
+  <ol>
+    <li>Apri il profilo Google del medico (Maps o Search).</li>
+    <li>Conta le recensioni 1 e 2 stelle degli ultimi 12 mesi.</li>
+    <li>Per ogni recensione negativa, classifica:
+      <ul>
+        <li><strong>Prematura</strong> → scritta a giorni/settimane da un intervento che dà risultato a mesi.</li>
+        <li><strong>Dati medici esposti</strong> → cita interventi, complicazioni, condizioni → violazione privacy.</li>
+        <li><strong>Diffamatoria</strong> → "truffatore", "incompetente", "mi ha rovinato".</li>
+        <li><strong>Sospetta competitor</strong> → account creato di recente, una sola recensione, profilo vuoto.</li>
+        <li><strong>Aspettativa irrealistica</strong> → "volevo il naso di Belen", lavoro tecnicamente perfetto.</li>
+        <li><strong>Altro / non rimovibile</strong> → critiche generiche e fondate.</li>
+      </ul>
+    </li>
+    <li>Calcola il <strong>danno stimato</strong> con la formula sotto.</li>
+    <li>Scegli 2–3 recensioni "facili" da mostrare in chiamata come esempio concreto.</li>
+    <li>Salva tutto in una nota interna sul lead.</li>
+  </ol>
+
+  <h3 class="doc-h3">Formula del danno (da usare in chiamata)</h3>
+  <div class="doc-quote doc-quote--key">
+    Pazienti persi al mese (stima) × Valore medio paziente × 12 = Danno annuo
+  </div>
+  <p><strong>Esempio chirurgo plastico</strong>: 2 pazienti/mese × 5.000 € = <strong>10.000 €/mese persi</strong> → 120.000 €/anno → <strong>600.000 € in 5 anni</strong>.</p>
+  <p><strong>Esempio medico estetico</strong>: 4 pazienti/mese × 800 € = <strong>3.200 €/mese persi</strong> → 38.400 €/anno.</p>
+  <p>👉 Questa è l'arma principale. Il prezzo (€300/recensione) sembra niente confrontato al danno.</p>
+
+  <h2 class="doc-h2" id="sop-03">SOP-03 — Primo contatto (telefono / WhatsApp)</h2>
+  <p><strong>Canale preferito</strong>: telefono diretto allo studio. <strong>Orari</strong>: martedì-giovedì, 10:00–12:00 e 15:00–17:00.</p>
+  <p><strong>⚠ PRIMA DI CHIAMARE</strong>: premere il bottone <strong>🔴 Registra Chiamata</strong> nella scheda lead (vedi SOP-04).</p>
+
+  <div class="doc-script">
+    <span class="doc-script__label">Apertura standard (15 secondi)</span>
+    <div class="doc-script__text">"Buongiorno, sono [nome] di ReviewShield. Mi sono permesso di chiamare perché ho appena guardato il profilo Google del Dr. [Cognome] e ho visto che ci sono recensioni che secondo le policy Google sono rimovibili. Posso parlargli 2 minuti o richiamare in un altro momento?"</div>
+  </div>
+
+  <div class="doc-script">
+    <span class="doc-script__label">Se non passa la segretaria</span>
+    <div class="doc-script__text">"Ho letto le recensioni del dottore e ne ho identificate 3 che possono essere rimosse legalmente da Google. Lo dica al dottore. Le lascio il mio numero — sono [nome], +39 XXX. La richiamata è gratuita e di interesse del dottore."</div>
+  </div>
+
+  <p>Se risponde direttamente il medico: vai a <strong>SOP-05</strong>. Per WhatsApp ed email: vedi <a href="#" onclick="showPage('script-rs');return false">Script Vendita</a>.</p>
+
+  <h2 class="doc-h2" id="sop-04"><span class="doc-emoji">🎙</span>SOP-04 — Registrazione chiamata obbligatoria</h2>
+  <div class="doc-quote doc-quote--alert">
+    <strong>TUTTE le chiamate vengono registrate. Senza eccezioni.</strong> Se un venditore aggiorna lo stato senza aver registrato, è imbroglio — verifica immediata.
+  </div>
+
+  <h3 class="doc-h3">Come funziona</h3>
+  <ol>
+    <li>Dentro la scheda di ogni lead, c'è il bottone <strong>🔴 Registra Chiamata</strong>.</li>
+    <li>Il venditore lo preme <strong>prima</strong> di chiamare il medico.</li>
+    <li>La registrazione parte dal PC: cattura il microfono e l'audio della chiamata (se in conference / VoIP).</li>
+    <li>Al termine, click su <strong>⏹ Stop</strong> → il file audio si salva automaticamente collegato al lead.</li>
+    <li>Sam e Thomas possono riascoltare quando vogliono per controllo qualità, coaching, verifica fatti.</li>
+  </ol>
+
+  <h3 class="doc-h3">Disclosure obbligatoria al cliente (per legge)</h3>
+  <div class="doc-script">
+    <span class="doc-script__label">Da dire all'inizio di ogni chiamata</span>
+    <div class="doc-script__text">"Dottore, le segnalo che questa chiamata può essere registrata per fini di qualità e formazione. Se non è d'accordo me lo dica, fermo la registrazione."</div>
+  </div>
+  <p>In pratica nessuno dice di no se viene chiesto in modo professionale. Ma va detto sempre — sennò siamo fuori legge.</p>
+
+  <h3 class="doc-h3">File audio</h3>
+  <ul>
+    <li>Si salvano automaticamente nella scheda del lead.</li>
+    <li>Non vanno scaricati, condivisi, mandati a terzi.</li>
+    <li>Restano sul server reviewshield per <strong>12 mesi minimo</strong>.</li>
+  </ul>
+
+  <h2 class="doc-h2" id="sop-05">SOP-05 — Demo / Chiamata di vendita</h2>
+  <p>Durata target: <strong>15–20 minuti</strong>. Struttura completa con script in <a href="#" onclick="showPage('script-rs');return false">Script Vendita</a>.</p>
+  <ol>
+    <li><strong>Empatia</strong> (2 min) — riconosci il dolore: "Quanto le pesa quella recensione?"</li>
+    <li><strong>Calcolo del danno</strong> (3 min) — usa la formula di SOP-02. Il prezzo dopo questo step sembra ridicolo.</li>
+    <li><strong>Soluzione</strong> (5 min) — chi siamo, come funzioniamo:
+      <ul>
+        <li>Team analisti + team legale + account manager dedicato</li>
+        <li>88% successo, 10 giorni medi (alcune in 48h)</li>
+        <li>900+ recensioni eliminate, 200+ cliniche, 7 anni di attività</li>
+        <li>5 policy Google sfruttate</li>
+        <li>0 accessi al profilo, 0 credenziali richieste</li>
+      </ul>
+    </li>
+    <li><strong>Garanzia</strong> (1 min):
+      <div class="doc-quote doc-quote--key">"Lei paga SOLO dopo che la recensione è sparita. Se non riusciamo, costo zero. Il rischio è tutto nostro."</div>
+    </li>
+    <li><strong>Prezzi</strong> (3 min) — vai a SOP-06.</li>
+    <li><strong>Chiusura</strong> (2 min) — invio link Stripe.</li>
+  </ol>
+  <p><strong>Mostrare in chiamata</strong> via WhatsApp:</p>
+  <ul>
+    <li>Case study Bologna: 9 recensioni rimosse, rating 3.6 → 4.7 in 12 giorni.</li>
+    <li>Case study Milano: recensione di 2 anni, rimossa in 6 giorni.</li>
+  </ul>
+
+  <h2 class="doc-h2" id="sop-06">SOP-06 — Chiusura e invio link Stripe</h2>
+  <h3 class="doc-h3">Listino ufficiale</h3>
+  <table class="doc-table">
+    <thead><tr><th>Pacchetto</th><th>Prezzo</th><th>Quando proporlo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Pulizia Singola</strong></td><td>€300 / recensione</td><td>1–3 recensioni da rimuovere</td></tr>
+      <tr><td><strong>Pacchetto 10</strong></td><td>€240 / recensione (sconto 20%)</td><td>4+ recensioni</td></tr>
+      <tr><td><strong>Monitoraggio Continuo</strong></td><td>€100 / mese</td><td>Sempre, come upsell o per profili "sani" che vogliono prevenzione</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="doc-h3">Procedura invio link Stripe</h3>
+  <ol>
+    <li>Venditore raccoglie: nome esatto attività + URL profilo Google + email + WhatsApp.</li>
+    <li>Venditore richiede a Sam/Thomas il <strong>link Stripe corretto</strong> (one-shot per pulizia, subscription per monitoraggio).</li>
+    <li>Sam/Thomas generano il link e lo girano al venditore.</li>
+    <li>Venditore inoltra al cliente con questo testo:
+      <div class="doc-script">
+        <div class="doc-script__text">"Dottore, come da accordo le mando il link Stripe. <strong>Non lo paghi adesso</strong> — apriamo il caso, rimuoviamo le recensioni, e quando le vede sparite saldano il link. Se non riusciamo, il link non viene mai pagato. Ci siamo?"</div>
+      </div>
+    </li>
+    <li>Venditore aggiorna stato lead in dashboard: <code>Chiuso — Stripe inviato</code>.</li>
+  </ol>
+
+  <div class="doc-quote doc-quote--alert">
+    <strong>REGOLA FERREA</strong>: il cliente <strong>non paga prima della rimozione</strong>. Mai. È il nostro principale argomento di vendita — non si tradisce.
+  </div>
+
+  <h2 class="doc-h2" id="sop-07">SOP-07 — Passaggio al team operativo</h2>
+  <p>Una volta accettato l'accordo e inviato lo Stripe, il venditore prepara il <strong>brief operativo</strong>:</p>
+  <pre style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:11.5px;color:var(--text);font-family:ui-monospace,Menlo,monospace;line-height:1.6;overflow-x:auto;white-space:pre-wrap">NUOVO CASO — ReviewShield
+
+Cliente: Dr. [Nome Cognome]
+Attività: [Nome esatto attività]
+URL Google: [link profilo]
+Città: [città]
+Email: [email]
+WhatsApp: [+39 ...]
+
+Recensioni da rimuovere ([N] totali):
+1. [URL recensione] — Autore: [nome] — Motivo: [policy violata] — Screenshot: [link]
+2. ...
+
+Pacchetto venduto: [Singola / Pacchetto 10 / Monitoraggio]
+Importo: € [totale]
+Stripe link: [URL] — stato: inviato, NON pagato
+
+Note venditore: [contesto utile, sensibilità, urgenze]</pre>
+  <p>Team operativo prende in carico entro <strong>24 ore</strong> e contatta il cliente con email di benvenuto firmata dall'account manager.</p>
+
+  <h2 class="doc-h2" id="sop-08">SOP-08 — Lavorazione e aggiornamenti al cliente</h2>
+  <p>Tempistica standard: <strong>10 giorni lavorativi</strong> (alcune cadono in 48h).</p>
+  <h3 class="doc-h3">Checkpoint obbligatori</h3>
+  <ul>
+    <li><strong>Giorno 0</strong>: email di benvenuto dell'account manager con timeline prevista.</li>
+    <li><strong>Giorno 2</strong>: aggiornamento "abbiamo costruito il dossier per recensioni X, Y, Z e abbiamo segnalato".</li>
+    <li><strong>Giorno 5</strong>: aggiornamento di stato (anche se "ancora in lavorazione").</li>
+    <li><strong>Giorno 10</strong>: aggiornamento finale — quante rimosse, quante in lavorazione, quante non eliminabili.</li>
+  </ul>
+  <p>Tono: professionale, pacato, mai trionfalistico finché la recensione non è sparita. Quando è sparita: screenshot prima/dopo come prova.</p>
+  <p>Se il caso supera i 14 giorni: l'account manager fa una <strong>telefonata</strong> per spiegare lo stato senza far sentire abbandonato il cliente.</p>
+
+  <h2 class="doc-h2" id="sop-09">SOP-09 — Conferma rimozione + incasso</h2>
+  <p>Quando una recensione sparisce dal profilo Google:</p>
+  <ol>
+    <li>Account manager verifica con due controlli a 24h di distanza (cache).</li>
+    <li>Salva screenshot <strong>prima</strong> (preso al momento della vendita) e <strong>dopo</strong>.</li>
+    <li>Invia email al cliente con prova + sollecito pagamento Stripe.</li>
+    <li>Notifica Sam/Thomas: "Cliente X — rimossa, sollecitato pagamento Stripe".</li>
+    <li>Sam/Thomas controllano lo Stripe entro <strong>48h</strong>. Se non pagato → SOP-11.</li>
+  </ol>
+  <p><strong>Subscription Monitoraggio</strong>: il primo addebito parte dal mese successivo alla prima rimozione confermata.</p>
+
+  <h2 class="doc-h2" id="sop-10">SOP-10 — Upsell post-vendita</h2>
+  <p>A <strong>7 giorni</strong> dalla rimozione, l'account manager propone:</p>
+  <ul>
+    <li>Cliente con singole pagate → <strong>Pacchetto 10</strong> scontato per recensioni future.</li>
+    <li>Cliente senza Monitoraggio → <strong>Monitoraggio Continuo €100/mese</strong> con questo angolo:
+      <div class="doc-quote">"Dottore, oggi lei è pulito. Ma il problema può ripresentarsi: bastano 1–2 recensioni nuove e siamo punto a capo. Con il Monitoraggio le copriamo TUTTE le recensioni future automaticamente, lei non deve nemmeno chiamare. 100 euro al mese e dorme tranquillo."</div>
+    </li>
+  </ul>
+  <p><strong>KPI minimo upsell</strong>: 30% dei clienti pulizia singola deve attivare Monitoraggio entro 30 giorni.</p>
+
+  <h2 class="doc-h2" id="sop-11">SOP-11 — Casi limite e contestazioni</h2>
+
+  <h3 class="doc-h3">Caso A — Cliente non paga lo Stripe dopo rimozione</h3>
+  <ol>
+    <li>Account manager invia 1° sollecito (giorno +3): "Le ricordo gentilmente il link Stripe ancora aperto."</li>
+    <li>Account manager invia 2° sollecito (giorno +7): tono fermo ma cortese.</li>
+    <li>Sam/Thomas inviano sollecito formale (giorno +14): via PEC se disponibile.</li>
+    <li>Se non paga entro 30 giorni: passaggio a recupero crediti.</li>
+  </ol>
+
+  <h3 class="doc-h3">Caso B — Recensione rimossa che riappare</h3>
+  <p>La rimuoviamo <strong>gratis</strong> (è dichiarato sulla landing). Apri nuovo dossier, segnala nuovamente, comunica al cliente: "ce ne occupiamo noi senza costi aggiuntivi".</p>
+
+  <h3 class="doc-h3">Caso C — Recensioni che non riusciamo a rimuovere</h3>
+  <p>Comunica al cliente con onestà: "questa rientra nelle critiche fondate, Google non la rimuoverà. Possiamo lavorare sulle altre N rimovibili." Costo per quelle non rimosse: <strong>zero</strong>.</p>
+
+  <h3 class="doc-h3">Caso D — Cliente vuole indietro i soldi dopo aver pagato</h3>
+  <p>Il pagamento Stripe è dovuto in cambio del risultato già consegnato. Mostrare screenshot prima/dopo, contratto/email di conferma. In caso di chargeback: contestare con la documentazione + audio della chiamata di vendita registrata.</p>
+
+  <h3 class="doc-h3">Caso E — Recensione che il cliente ritiene rimovibile, ma non lo è</h3>
+  <p>Fai un'analisi onesta in fase di vendita: meglio dirlo prima che dopo. Se ti accorgi solo dopo: comunica al cliente, non addebitare nulla per quella, lavora solo su quelle effettivamente rimovibili.</p>
+
+  <h2 class="doc-h2" id="sop-12"><span class="doc-emoji">📊</span>SOP-12 — Reportistica per venditore</h2>
+  <p>Sam e Thomas controllano la dashboard ogni settimana per vedere come stanno performando i venditori. Ogni venditore vede solo i propri numeri.</p>
+
+  <h3 class="doc-h3">KPI per venditore</h3>
+  <table class="doc-table">
+    <thead><tr><th>KPI</th><th>Cosa misura</th><th>Target</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Lead assegnati</strong></td><td>Quanti lead ha avuto in carico nel periodo</td><td>—</td></tr>
+      <tr><td><strong>Lead contattati</strong></td><td>Quanti ha effettivamente chiamato</td><td>≥ 90% degli assegnati</td></tr>
+      <tr><td><strong>Chiamate registrate</strong></td><td>Quante chiamate ha registrato</td><td>= numero contatti</td></tr>
+      <tr><td><strong>Tasso di risposta</strong></td><td>Hanno risposto / contattati</td><td>≥ 40%</td></tr>
+      <tr><td><strong>Demo fissate</strong></td><td>Quante chiamate sono diventate appuntamenti</td><td>≥ 25% dei contattati</td></tr>
+      <tr><td><strong>Demo fatte</strong></td><td>Quante demo si sono concluse</td><td>≥ 80% delle fissate</td></tr>
+      <tr><td><strong>Vendite chiuse</strong></td><td>Quanti accordi conclusi</td><td>≥ 20% delle demo</td></tr>
+      <tr><td><strong>Fatturato generato</strong></td><td>Totale € incassati via Stripe</td><td>—</td></tr>
+      <tr><td><strong>Tempo medio chiamata</strong></td><td>Durata media (da audio registrato)</td><td>5–12 min</td></tr>
+      <tr><td><strong>Lead "freddi"</strong></td><td>Lead in pancia non lavorati &gt; 7 giorni</td><td>0</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="doc-h3">Frequenza review</h3>
+  <ul>
+    <li><strong>Giornaliera</strong>: Sam dà un occhio veloce ai numeri di ieri.</li>
+    <li><strong>Settimanale (lunedì)</strong>: review 1-on-1 con ogni venditore. Aprire 2-3 chiamate registrate scelte a caso, ascoltare, dare feedback.</li>
+    <li><strong>Mensile</strong>: classifica venditori, premio/bonus al top performer, eventuali tagli di chi è sotto target da 2+ mesi consecutivi.</li>
+  </ul>
+
+  <h3 class="doc-h3">Indicatori di allarme (Sam interviene subito)</h3>
+  <ul>
+    <li>Venditore con &lt; 50% lead contattati su quelli assegnati → <strong>blocco assegnazioni nuove</strong> fino a recupero.</li>
+    <li>Venditore con 0 chiamate registrate ma stati aggiornati → <strong>possibile imbroglio</strong>, ascoltare a campione.</li>
+    <li>Tasso di rifiuto &gt; 70% → problema di approccio, fare coaching.</li>
+    <li>Tempo medio chiamata &lt; 3 min su demo → non sta vendendo, sta scappando dalle obiezioni.</li>
+  </ul>
+
+  <h2 class="doc-h2" id="sop-numeri">Numeri ufficiali da citare</h2>
+  <p>Da memorizzare e ripetere SEMPRE in chiamata. Sono i numeri della landing — non si inventano.</p>
+  <table class="doc-table">
+    <thead><tr><th>Metrica</th><th>Valore</th></tr></thead>
+    <tbody>
+      <tr><td>Tasso di successo</td><td><strong>88%</strong></td></tr>
+      <tr><td>Recensioni eliminate (totale storico)</td><td><strong>900+</strong></td></tr>
+      <tr><td>Cliniche e studi serviti</td><td><strong>200+</strong></td></tr>
+      <tr><td>Tempo medio di rimozione</td><td><strong>10 giorni</strong> lavorativi (alcune in 48h)</td></tr>
+      <tr><td>Anni di attività nel settore</td><td><strong>7 anni</strong></td></tr>
+      <tr><td>Anni esperienza team legale</td><td><strong>12+ anni</strong></td></tr>
+      <tr><td>Risposta entro</td><td><strong>2 ore</strong></td></tr>
+      <tr><td>Policy Google sfruttate</td><td><strong>5</strong> (Contenuto Fuorviante, Privacy, Conflitto di Interessi, Diffamazione, Spam)</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="doc-h3">Trust badges (da ripetere a chiusura)</h3>
+  <ul>
+    <li>✅ Paghi solo dopo la rimozione</li>
+    <li>✅ Zero pagamenti anticipati</li>
+    <li>✅ 100% legale e conforme</li>
+    <li>✅ Nessun accesso al profilo</li>
+  </ul>
+
+  <hr>
+  <p style="font-size:11px;color:var(--muted);text-align:center">Per integrazioni o feedback dal campo: parlare con Samuele o Thomas.</p>
+</div>
+
+<!-- ==================== SCRIPT VENDITA REVIEWSHIELD ==================== -->
+<div class="page doc-page" id="page-script-rs">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+    <button class="doc-back" onclick="showPage('live')">&larr; Torna a Progetti</button>
+    <span class="doc-badge">ReviewShield</span>
+  </div>
+  <div class="page-title">💬 Script Vendita — ReviewShield</div>
+  <p class="page-sub">Script operativi per i venditori. Da memorizzare, non da leggere.</p>
+
+  <div class="doc-banner">
+    <strong>Regola d'oro</strong>: il cliente paga <strong>solo dopo</strong> la rimozione. Se non riusciamo, costo zero. Va detto in ogni chiamata, almeno <strong>2 volte</strong>.
+  </div>
+
+  <div class="doc-quote doc-quote--alert">
+    <strong>⚠ Disclosure obbligatoria all'inizio di ogni chiamata</strong> (vedi <a href="#" onclick="showPage('sop-rs');return false">SOP-04</a>):<br>
+    "Dottore, le segnalo che questa chiamata può essere registrata per fini di qualità e formazione. Se non è d'accordo me lo dica, fermo la registrazione."
+  </div>
+
+  <div class="doc-toc">
+    <strong>Indice</strong>
+    <ol>
+      <li><a href="#scr-1">Script 1 — Cold call (telefonata a freddo)</a></li>
+      <li><a href="#scr-2">Script 2 — Apertura WhatsApp</a></li>
+      <li><a href="#scr-3">Script 3 — Email di apertura</a></li>
+      <li><a href="#scr-4">Script 4 — Demo / Chiamata di vendita (15–20 min)</a></li>
+      <li><a href="#scr-5">Script 5 — Gestione obiezioni (10 obiezioni)</a></li>
+      <li><a href="#scr-6">Script 6 — Chiusura e invio link Stripe</a></li>
+      <li><a href="#scr-7">Script 7 — Follow-up se non risponde</a></li>
+      <li><a href="#scr-8">Script 8 — Closing post-rimozione + Upsell</a></li>
+      <li><a href="#scr-vietate">Frasi che NON si dicono mai</a></li>
+      <li><a href="#scr-cheat">Cheat sheet — i 4 messaggi chiave</a></li>
+    </ol>
+  </div>
+
+  <h2 class="doc-h2" id="scr-1">Script 1 — Cold call (telefonata a freddo)</h2>
+  <p><strong>Tempo target</strong>: 90 secondi per arrivare al "sì" dell'analisi gratuita.</p>
+  <p><strong>⚠ Premere 🔴 Registra Chiamata PRIMA di chiamare.</strong></p>
+
+  <h3 class="doc-h3">Apertura (15 secondi)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Buongiorno dottore, sono <strong>[nome]</strong> di <strong>ReviewShield</strong>. La chiamo perché ho appena dato un'occhiata al suo profilo Google e ho notato qualcosa che vorrei farle vedere — ha 30 secondi?"</div>
+  </div>
+
+  <h3 class="doc-h3">Variante segretaria</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Buongiorno, sono [nome] di ReviewShield. Ho un'analisi gratuita da fare al dottore sul suo profilo Google — abbiamo identificato 3 recensioni negative che probabilmente possiamo rimuovere. Quando posso parlargli? Sono [+39 XXX], la richiamata è gratuita."</div>
+  </div>
+
+  <h3 class="doc-h3">Hook (20 secondi)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Ho contato <strong>[N] recensioni</strong> a 1 e 2 stelle sul suo profilo. Una in particolare — quella di <strong>[autore]</strong> del <strong>[data]</strong> — è scritta a <strong>[X] giorni</strong> da un intervento che dà risultato a <strong>[6/12] mesi</strong>. Quella, secondo le policy Google, è rimovibile. E sospetto che ce ne siano almeno altre due nello stesso caso."</div>
+  </div>
+
+  <h3 class="doc-h3">Pitch corto (30 secondi)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Noi siamo specializzati nel settore medico-estetico. Abbiamo <strong>88% di successo</strong>, tempo medio <strong>10 giorni</strong>. E qui sta il punto: <strong>lei paga solo dopo che la recensione è sparita dal profilo</strong>. Se non riusciamo, costo zero. Il rischio è tutto nostro."</div>
+  </div>
+
+  <h3 class="doc-h3">Chiusura per analisi gratuita (20 secondi)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Le faccio un'<strong>analisi gratuita</strong> del suo profilo. Le dico esattamente quali recensioni possiamo togliere e quali no, senza impegno. Le va se le mando un messaggio WhatsApp con i dettagli? A che numero la trovo?"</div>
+  </div>
+
+  <h2 class="doc-h2" id="scr-2">Script 2 — Apertura WhatsApp</h2>
+
+  <h3 class="doc-h3">Messaggio 1 — apertura breve</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">Buongiorno Dr. <strong>[Cognome]</strong>, sono <strong>[nome]</strong> di ReviewShield. Abbiamo analizzato il suo profilo Google e crediamo di poter rimuovere <strong>[N] recensioni negative</strong>. Le mando l'analisi gratuita? Le bastano 2 minuti per leggerla.</div>
+  </div>
+
+  <h3 class="doc-h3">Messaggio 2 — analisi (se risponde sì)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">
+      Perfetto. Le mando l'analisi.<br><br>
+      <strong>Recensioni rimovibili</strong> che abbiamo identificato:<br>
+      1. <strong>[Autore]</strong> — [data] — <em>Motivo</em>: scritta a [X] giorni dall'intervento, viola policy Google "Contenuto Fuorviante".<br>
+      2. <strong>[Autore]</strong> — [data] — <em>Motivo</em>: contiene dettagli medici che violano la privacy.<br>
+      3. <strong>[Autore]</strong> — [data] — <em>Motivo</em>: account creato 2 giorni prima, una sola recensione — pattern competitor.<br><br>
+      🛡 <strong>88% di successo</strong>, <strong>10 giorni medi</strong>, <strong>paga solo dopo la rimozione</strong>.<br>
+      Niente credenziali, niente accessi al suo profilo.<br><br>
+      Se vuole, le faccio una chiamata di <strong>15 minuti</strong> in cui le spiego come procediamo. Quando le va bene? Le propongo: <strong>[domani 11:00]</strong> o <strong>[domani 16:00]</strong>?
+    </div>
+  </div>
+
+  <h3 class="doc-h3">Messaggio 3 — riprova dopo 24h</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">Dottore, le ho mandato l'analisi ieri. Una sola domanda: vuole che ce ne occupiamo noi o lascia perdere? Mi basta un sì o un no.</div>
+  </div>
+
+  <h2 class="doc-h2" id="scr-3">Script 3 — Email di apertura</h2>
+  <p><strong>Oggetto</strong>: 3 recensioni rimovibili sul suo profilo Google</p>
+  <div class="doc-script">
+    <div class="doc-script__text">
+      Gentile Dr. <strong>[Cognome]</strong>,<br><br>
+      Sono <strong>[nome]</strong> di <strong>ReviewShield</strong>, ci occupiamo esclusivamente di rimozione recensioni negative dal settore medico-estetico.<br><br>
+      Ho analizzato il profilo Google del suo studio e ho identificato <strong>[N] recensioni</strong> che, secondo le policy Google ufficiali, sono rimovibili. Le riassumo:<br><br>
+      1. <strong>Recensione di [autore]</strong> ([data]) — scritta troppo presto rispetto al risultato definitivo dell'intervento. Violazione "Contenuto Fuorviante".<br>
+      2. <strong>Recensione di [autore]</strong> ([data]) — contiene dettagli medici esposti senza consenso. Violazione privacy.<br>
+      3. <strong>Recensione di [autore]</strong> ([data]) — pattern tipico da account competitor.<br><br>
+      Come funziona:<br>
+      • <strong>Analisi gratuita</strong> del profilo, senza impegno<br>
+      • Costruzione del <strong>dossier tecnico-legale</strong> da parte del nostro team<br>
+      • Segnalazione attraverso i canali ufficiali Google<br>
+      • <strong>Lei paga solo dopo che la recensione è sparita</strong>. Se non riusciamo, il costo è zero.<br>
+      • <strong>Tasso di successo: 88%</strong>. Tempo medio: 10 giorni lavorativi.<br>
+      • <strong>Nessuna credenziale richiesta</strong>, nessun accesso al suo profilo.<br><br>
+      Se vuole approfondire, le posso dedicare 15 minuti di chiamata in uno di questi slot:<br>
+      • [domani 11:00]<br>
+      • [domani 16:00]<br>
+      • [dopodomani 10:00]<br><br>
+      Cordiali saluti,<br>
+      [nome] — ReviewShield
+    </div>
+  </div>
+
+  <h2 class="doc-h2" id="scr-4">Script 4 — Demo / Chiamata di vendita (15–20 min)</h2>
+  <p><strong>Obiettivo</strong>: chiudere l'accordo e inviare lo Stripe entro fine chiamata.</p>
+
+  <h3 class="doc-h3">Step 1 — Empatia (2 min)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Dottore, prima di tutto le faccio una domanda: <strong>quanto le pesa quella recensione?</strong> Quando la rilegge, cosa pensa?"<br><br>
+      <em>[ascolta. Non interrompere.]</em><br><br>
+      "Le dico una cosa. I nostri clienti, quando ci chiamano la prima volta, hanno la voce che gli trema. Non è solo la recensione — è la sensazione di essere <strong>ostaggio di uno sconosciuto</strong> che con 3 righe ha distrutto anni di lavoro. La capisco perfettamente. Ed è esattamente per questo che esistiamo noi."</div>
+  </div>
+
+  <h3 class="doc-h3">Step 2 — Calcolo del danno (3 min) — ARMA PIÙ POTENTE</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Facciamo un calcolo veloce. <strong>Quanto vale un suo paziente medio</strong>, come fatturato? Una rinoplastica, un'augmentation, un trattamento medio?"<br><br>
+      <em>[aspetta risposta. Esempio: €5.000]</em><br><br>
+      "Bene. Adesso, <strong>secondo lei</strong>, quante chiamate perde al mese a causa di queste recensioni? Quante persone aprono il suo profilo Google, vedono il 4.0 invece di un 4.7, e vanno dal competitor di fianco?"<br><br>
+      <em>[aspetta risposta. Esempio: 2 al mese]</em><br><br>
+      "<strong>2 pazienti al mese × 5.000 euro = 10.000 euro persi al mese.</strong> Sono <strong>120.000 all'anno</strong>. <strong>600.000 euro in 5 anni</strong>. E sa qual è la cosa peggiore? Lei sta perdendo questi soldi <strong>adesso</strong>, in questo esatto momento, ogni giorno che quella recensione resta lì. Mentre noi parliamo."</div>
+  </div>
+
+  <h3 class="doc-h3">Step 3 — Soluzione (5 min)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Adesso le spiego chi siamo. Noi <strong>non siamo un software automatico</strong>. Siamo un team di tre figure:<br><br>
+      <strong>1. Analisti digitali</strong> — costruiscono il dossier tecnico per ogni recensione: chi è l'autore, quando è stato creato l'account, pattern sospetti. <strong>900 dossier costruiti</strong>.<br><br>
+      <strong>2. Team legale</strong> — avvocati specializzati in <strong>diritto digitale e privacy</strong>. Sanno tradurre la violazione in documentazione che Google non può ignorare. <strong>12 anni di esperienza</strong>.<br><br>
+      <strong>3. Account manager dedicato</strong> — un riferimento unico che la aggiorna ogni 48 ore. Lei non è un ticket, è un caso seguito personalmente.<br><br>
+      Sfruttiamo <strong>5 policy Google</strong>: contenuto fuorviante, privacy, conflitto d'interessi, diffamazione, spam.<br><br>
+      Lavoriamo <strong>solo nel settore medico-estetico</strong>. <strong>7 anni di attività. 900+ recensioni eliminate. 200+ cliniche servite. 88% di successo.</strong>"</div>
+  </div>
+
+  <h3 class="doc-h3">Step 4 — Garanzia (1 min) — IL PUNTO CHIAVE</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Dottore, qui sta la cosa importante. <strong>Lei non paga niente fino a quando la recensione non è sparita dal profilo.</strong> Niente. Le mando un link Stripe, ma non lo paga subito. Lo paga solo dopo aver visto con i suoi occhi che la recensione è sparita.<br><br>
+      <strong>Se non riusciamo, costo zero.</strong> Il rischio è tutto nostro. Sempre. Per questo possiamo permetterci di lavorare in questo modo — perché siamo bravi davvero. Se non lo fossimo, saremmo falliti il primo mese."</div>
+  </div>
+
+  <h3 class="doc-h3">Step 5 — Prezzi (3 min)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Le presento le tre opzioni:<br><br>
+      <strong>1. Pulizia Singola — 300 euro a recensione</strong>. Per chi vuole partire piano, magari con 1 o 2 recensioni.<br><br>
+      <strong>2. Pacchetto Pulizia Completa — 240 a recensione, sconto 20%, in blocchi da 10</strong>. Per chi ha più recensioni e vuole risparmiare.<br><br>
+      <strong>3. Monitoraggio Continuo — 100 euro al mese</strong>. Le copriamo tutte le recensioni future automaticamente. Alert immediato, rimozione automatica.<br><br>
+      Per il suo caso, dato che ha [N] recensioni rimovibili, le consiglio <strong>[singole / pacchetto 10]</strong>. Ma decida lei: cosa le sembra più sensato?"</div>
+  </div>
+
+  <h2 class="doc-h2" id="scr-5">Script 5 — Gestione obiezioni</h2>
+  <div class="doc-quote doc-quote--key">Regola: non si <strong>discute</strong> un'obiezione, si <strong>riconosce e si supera</strong>. Mai dire "non è vero", mai mettere il cliente in difetto.</div>
+
+  <h3 class="doc-h3">Obiezione 1 — "È troppo caro"</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Capisco. Mi fermi se sbaglio: lei fa un intervento medio a <strong>[€5.000]</strong>. Se per colpa di queste recensioni perde <strong>2 pazienti al mese</strong>, sono <strong>10.000 euro persi ogni mese</strong>. La nostra fattura per recensione è <strong>300 euro</strong>. Ne basta una rimossa per rientrare 16 volte. È <strong>l'investimento col ritorno più veloce</strong> che farà mai. E ricorda: paga solo se funziona, sennò zero. Cosa la frena davvero?"</div>
+  </div>
+
+  <h3 class="doc-h3">Obiezione 2 — "È legale?"</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Tutto al 100% legale, <strong>canali ufficiali Google</strong>. Abbiamo un team legale dedicato — non è un trucco, non è un bot, non è hacking, non accediamo al suo profilo. Noi segnaliamo a Google le recensioni che <strong>violano le policy</strong> che Google stesso ha pubblicato, e Google le rimuove. Punto. Lei può leggere le policy direttamente sul sito di Google, sono pubbliche."</div>
+  </div>
+
+  <h3 class="doc-h3">Obiezione 3 — "Devo darvi le credenziali / password?"</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"<strong>Mai.</strong> Mi basta il nome esatto della sua attività. Niente password, niente accessi, niente compromessi. Pensiamo a tutto noi <strong>dall'esterno</strong>. Anzi, è una delle ragioni per cui Google si fida delle nostre segnalazioni — perché vengono da terzi documentati, non dall'interno del profilo."</div>
+  </div>
+
+  <h3 class="doc-h3">Obiezione 4 — "Lo posso fare anche io segnalando direttamente a Google"</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Può provare, e gliel'auguro. Le dico la verità però: il <strong>90% delle segnalazioni dirette viene ignorato</strong>. Google non legge ogni segnalazione singolarmente — serve un dossier strutturato che citi la <strong>policy esatta</strong>, mostri le <strong>prove</strong>, sia inviato attraverso i <strong>canali corretti</strong>, e abbia uno <strong>storico di credibilità</strong>. Per questo servono analisti e avvocati. Provi pure: se ci riesce, perfetto, non ci serve. Se non ci riesce nei prossimi 30 giorni, mi richiami."</div>
+  </div>
+
+  <h3 class="doc-h3">Obiezione 5 — "Devo pensarci"</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Capisco. Le faccio una sola domanda: <strong>quante recensioni negative ha ricevuto negli ultimi 6 mesi?</strong>"<br><br>
+      <em>[aspetta]</em><br><br>
+      "Bene. Quante ne riceverà nei prossimi 6 mesi se non fa nulla? <strong>Almeno altrettante</strong>. Ogni giorno che passa, perde pazienti. Non c'è fretta da parte mia, però: io le mando l'<strong>analisi gratuita</strong> stasera, così ce l'ha pronta quando decide. Quando vuole, mi chiama. Le va bene?"<br><br>
+      <em>[se ancora "ci penso"]</em><br><br>
+      "Ultima cosa: lei rischia zero. Se le manda lo Stripe e non paga finché non vediamo la rimozione, <strong>cosa ha da perdere?</strong> Letteralmente nulla. Cosa la frena davvero, dottore?"</div>
+  </div>
+
+  <h3 class="doc-h3">Obiezione 6 — "Il paziente che ha scritto la recensione lo viene a sapere?"</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"<strong>No, mai.</strong> Google <strong>non avvisa</strong> mai l'autore quando una recensione viene rimossa. Nessuna mail, nessun alert, niente. La recensione semplicemente <strong>sparisce</strong>. Nel caso rarissimo in cui dovesse riscriverla — ed è successo poche volte in 7 anni — gliela rimuoviamo <strong>gratis</strong>."</div>
+  </div>
+
+  <h3 class="doc-h3">Obiezione 7 — "Quanto tempo ci mettete?"</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"<strong>Tempo medio 10 giorni lavorativi.</strong> Alcune recensioni cadono in <strong>48 ore</strong>, altre richiedono qualche giorno in più. Le diamo aggiornamenti <strong>ogni 48 ore</strong> dal suo account manager dedicato, così sa sempre a che punto siamo."</div>
+  </div>
+
+  <h3 class="doc-h3">Obiezione 8 — "Avete clienti come me?"</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Esclusivamente. È la nostra <strong>unica specializzazione</strong>. Le faccio 2 esempi recenti:<br><br>
+      • <strong>Clinica di Chirurgia Plastica a Milano</strong>: aveva una recensione che la perseguitava da 2 anni. Tutti gli avevano detto 'non si può fare niente'. L'abbiamo tolta in <strong>6 giorni</strong>.<br>
+      • <strong>Centro Polispecialistico a Bologna</strong>: rating <strong>3.6</strong>. In <strong>12 giorni</strong> abbiamo rimosso <strong>9 recensioni</strong>. Oggi è a <strong>4.7</strong>.<br><br>
+      Se mi dà 5 minuti, le mando gli screenshot prima/dopo via WhatsApp adesso."</div>
+  </div>
+
+  <h3 class="doc-h3">Obiezione 9 — "E se Google blocca il mio profilo per le segnalazioni?"</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Non succede, perché <strong>non passiamo dal suo profilo</strong>. Le segnalazioni arrivano dai nostri canali, non dal suo account. Google non sa nemmeno che lei esiste fino a quando non rimuove la recensione. <strong>Zero rischi sul suo profilo.</strong> È la prima domanda che ci fanno tutti, ed è il motivo per cui in 7 anni non abbiamo avuto un solo caso di problema."</div>
+  </div>
+
+  <h3 class="doc-h3">Obiezione 10 — "Devo parlarne col mio commercialista / collega / socio"</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Certo, ne parli. Le mando intanto l'<strong>analisi gratuita</strong> scritta — così ha qualcosa di concreto da mostrare. Non costa nulla averla. Quando vi siete decisi, mi richiami. <strong>Una sola domanda però</strong>: cosa pensa che le risponderà il commercialista? Probabilmente le dirà 'fai due conti'. Quei due conti glieli ho già fatti io: 300 euro contro 10.000 al mese persi. Comunque, ne parli pure. Le mando l'analisi adesso."</div>
+  </div>
+
+  <h2 class="doc-h2" id="scr-6">Script 6 — Chiusura e invio link Stripe</h2>
+
+  <h3 class="doc-h3">Frase di chiusura in chiamata</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Allora dottore, riassumo: partiamo con <strong>[Pulizia Singola / Pacchetto 10 / Monitoraggio]</strong> per <strong>€[importo]</strong>. Le mando ora il link Stripe via WhatsApp. <strong>Non lo paghi adesso</strong> — apriamo il caso, rimuoviamo le recensioni, e quando le vede sparite con i suoi occhi salda il link. Se non riusciamo, il link non viene mai pagato.<br><br>
+      Mi serve solo: <strong>nome esatto della sua attività</strong> come appare su Google, e la conferma che le <strong>3 recensioni</strong> che le ho identificato sono quelle che vuole rimuovere. Procediamo?"</div>
+  </div>
+
+  <h3 class="doc-h3">Messaggio WhatsApp con il link Stripe</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">
+      Dottore, come da accordo le mando il link per il pagamento.<br><br>
+      🔗 <strong>[link Stripe]</strong><br><br>
+      🛡 <strong>Importante</strong>: NON lo paghi adesso. Apriamo subito il suo caso, rimuoviamo le recensioni, e quando le vede sparite procede col pagamento. Se non riusciamo, il link non viene mai saldato.<br><br>
+      Il suo <strong>account manager</strong> la contatterà entro 24 ore con la timeline e gli aggiornamenti. Tempi medi: 10 giorni.<br><br>
+      A presto, [nome] — ReviewShield
+    </div>
+  </div>
+
+  <h2 class="doc-h2" id="scr-7">Script 7 — Follow-up se non risponde</h2>
+
+  <h3 class="doc-h3">Dopo 24h (WhatsApp)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">Buongiorno Dr. <strong>[Cognome]</strong>, ha avuto modo di guardare l'analisi che le ho mandato ieri? Se ha 5 minuti la chiamo io, mi dica quando le va bene.</div>
+  </div>
+
+  <h3 class="doc-h3">Dopo 72h (WhatsApp)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">Dottore, una sola domanda: la recensione di <strong>[data]</strong> è ancora sul suo profilo. <strong>Vuole che ce la togliamo o lasciamo perdere?</strong> Mi dica solo sì o no, niente lunghi messaggi.</div>
+  </div>
+
+  <h3 class="doc-h3">Dopo 7 giorni (chiamata)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Dottore, sono [nome] di ReviewShield. Volevo solo capire: c'è qualcosa che la frena? Posso chiarire qualche dubbio? La nostra offerta resta valida — paga solo dopo la rimozione, costo zero se non riusciamo. Cosa la trattiene?"</div>
+  </div>
+
+  <h3 class="doc-h3">Se non risponde — WhatsApp</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">Dottore, capisco le mille cose. Le lascio l'offerta aperta. Se cambia idea mi scriva qui, parto subito col caso. Se invece preferisce non sentirmi più, mi mandi un "stop" e non la disturbo più. Buona giornata.</div>
+  </div>
+
+  <h3 class="doc-h3">Dopo 30 giorni — riapertura</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">Buongiorno Dr. <strong>[Cognome]</strong>, controllando il suo profilo ho visto che è arrivata una nuova recensione negativa il [data]. Le riconfermo l'offerta: prima rimuoviamo, poi paga. Le va se ne riparliamo?</div>
+  </div>
+
+  <h2 class="doc-h2" id="scr-8">Script 8 — Closing post-rimozione + Upsell Monitoraggio</h2>
+
+  <h3 class="doc-h3">Comunicazione "recensione rimossa" (WhatsApp)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">
+      Dottore, ottime notizie. La recensione di <strong>[autore]</strong> del <strong>[data]</strong> è stata <strong>rimossa definitivamente</strong> da Google. Le allego screenshot prima/dopo come prova.<br><br>
+      📸 [screenshot prima]<br>
+      📸 [screenshot dopo]<br><br>
+      Come da accordo, può ora completare il pagamento del link Stripe che le ho mandato. Se ha problemi col link mi scriva.
+    </div>
+  </div>
+
+  <h3 class="doc-h3">Pitch upsell Monitoraggio (a 7 giorni dalla prima rimozione)</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Dottore, le faccio un pensiero. Oggi il suo profilo è pulito grazie a noi. Però — e glielo dico con onestà — il problema <strong>può ripresentarsi</strong>. Bastano 1 o 2 recensioni nuove e siamo punto a capo.<br><br>
+      Per i clienti come lei abbiamo il <strong>Monitoraggio Continuo</strong> a <strong>100 euro al mese</strong>:<br>
+      • Monitoriamo il suo profilo <strong>24/7</strong><br>
+      • <strong>Alert immediato</strong> appena arriva una recensione negativa<br>
+      • <strong>Rimozione automatica</strong> se è rimovibile, senza che lei debba fare niente<br>
+      • <strong>Account manager dedicato</strong> per qualsiasi cosa<br>
+      • <strong>Report mensile</strong> con lo stato della sua reputazione<br><br>
+      Sono <strong>100 euro al mese</strong>. Lei dorme tranquillo, noi lavoriamo nel silenzio. Le mando il link?"</div>
+  </div>
+
+  <h3 class="doc-h3">Se obiezione "100 al mese sono tanti"</h3>
+  <div class="doc-script">
+    <div class="doc-script__text">"Dottore, le ricordo i numeri di prima: una sola recensione che le costa 2 pazienti — sono 10.000 euro persi. Il monitoraggio costa <strong>100</strong>. È <strong>l'1% del danno</strong> di una sola recensione lasciata lì. E può cancellarlo in qualsiasi momento."</div>
+  </div>
+
+  <h2 class="doc-h2" id="scr-vietate">Frasi che NON si dicono mai</h2>
+  <table class="doc-table">
+    <thead><tr><th>❌ Da evitare</th><th>✅ Dire invece</th></tr></thead>
+    <tbody>
+      <tr><td>"Promettiamo di rimuoverla"</td><td><strong>"88% di successo. Se non riusciamo, costo zero."</strong></td></tr>
+      <tr><td>"Hackeriamo Google" / "Trucchi"</td><td><strong>"Canali ufficiali Google. Team legale. Tutto trasparente."</strong></td></tr>
+      <tr><td>"Bot / automazione / software"</td><td><strong>"Team di analisti, avvocati e account manager. Persone, non software."</strong></td></tr>
+      <tr><td>"Mi dia la sua password"</td><td><strong>"Mai. Mi basta il nome dell'attività."</strong></td></tr>
+      <tr><td>"Sicuramente la rimuoviamo"</td><td><strong>"Le facciamo l'analisi gratuita e le diciamo cosa è rimovibile."</strong></td></tr>
+      <tr><td>"Paga subito, poi rimuoviamo"</td><td><strong>"Prima la rimuoviamo, poi paga. Sempre."</strong></td></tr>
+      <tr><td>"È un investimento" <em>(senza numeri)</em></td><td><strong>"[Calcolo del danno specifico col fatturato del cliente]"</strong></td></tr>
+      <tr><td>"Domani sparisce"</td><td><strong>"Tempo medio 10 giorni. Alcune in 48 ore, alcune più."</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="doc-h2" id="scr-cheat">Cheat sheet — i 4 messaggi chiave da ripetere</h2>
+  <p>In ogni chiamata, in ogni messaggio, in ogni email — questi 4 punti devono entrare almeno una volta ciascuno:</p>
+  <ol>
+    <li><strong>"Paga solo dopo la rimozione."</strong> ← La garanzia. Ripetere 2-3 volte.</li>
+    <li><strong>"88% di successo, 10 giorni medi."</strong> ← I numeri.</li>
+    <li><strong>"Niente credenziali, niente accessi al suo profilo."</strong> ← Sicurezza.</li>
+    <li><strong>"Specializzati nel settore medico-estetico, 7 anni, 900 recensioni eliminate."</strong> ← Autorità.</li>
+  </ol>
+
+  <hr>
+  <p style="font-size:11px;color:var(--muted);text-align:center">Per integrazioni o feedback dal campo: parlare con Samuele o Thomas.</p>
 </div>
 
 </div>
