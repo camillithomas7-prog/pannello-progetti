@@ -1161,6 +1161,9 @@ RISPOSTE RAPIDE:
       <div class="proj__links">
         <a href="http://localhost:8897" target="_blank" class="btn-link btn-site">Locale :8897</a>
         <a href="https://reviewshieldita.lovable.app" target="_blank" class="btn-link btn-admin">Originale</a>
+        <a href="https://reviewshieldita.lovable.app/admin/dashboard" target="_blank" class="btn-link btn-admin">Dashboard Lead</a>
+        <a href="https://github.com/camillithomas7-prog/pannello-progetti/blob/master/docs/reviewshield/sop.md" target="_blank" class="btn-link btn-admin">📋 SOP</a>
+        <a href="https://github.com/camillithomas7-prog/pannello-progetti/blob/master/docs/reviewshield/script-vendita.md" target="_blank" class="btn-link btn-admin">💬 Script Vendita</a>
       </div>
       <div class="proj__cmd">Locale: <code>~/reviewshield</code> — Avvia: <code>cd ~/reviewshield && python3 -m http.server 8897</code></div>
       <div class="proj__files" data-project="rs"></div>
